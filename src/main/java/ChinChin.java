@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class ChinChin {
+
+    private static CustomList customList = new CustomList();
+
     public static void main(String[] args) {
 
         // Constants
@@ -18,15 +21,20 @@ public class ChinChin {
         while (true) {
             String userInput = scanner.nextLine();
 
-            if (userInput.toLowerCase().equals("bye")) {
+            if (userInput.toLowerCase().equals("bye")) { // if user types "bye"
                 System.out.println("\n" + line);
                 System.out.println(goodbyes);
                 System.out.println(line + "\n");
                 break;
-            } else {
+            } else if (userInput.toLowerCase().equals("list")) { // if user types "list"
                 System.out.println("\n" + line);
-                System.out.println(userInput);
+                customList.showList();
                 System.out.println(line + "\n");
+            } else { // if user types anything other than "bye" or "list", adds it to the list
+                System.out.println("\n" + line);
+                System.out.println("added: " + userInput);
+                System.out.println(line + "\n");
+                customList.addToList(userInput);
             }
         }
     }
