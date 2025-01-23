@@ -9,9 +9,13 @@ public class CustomList {
     }
 
     // Add task to the ArrayList
-    public void addToList(String task) {
-        Task newTask = new Task(task);
-        this.customList.add(newTask);
+    public void addToList(Task task) {
+        this.customList.add(task);
+    }
+
+    // Returns the size of the list
+    public int size() {
+        return this.customList.size();
     }
 
     // Display the entire list
@@ -19,6 +23,7 @@ public class CustomList {
         if (this.customList.size() == 0) { // if ArrayList is empty, let the user know
             System.out.println("List is empty!");
         } else { // else show everything in the list
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < this.customList.size(); i++) {
                 System.out.println((i + 1) + ". " + (String) this.customList.get(i).show());
             }
@@ -43,5 +48,34 @@ public class CustomList {
         String taskInfo = currentTask.show();
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(taskInfo);
+    }
+
+    // Create a new Todo Task
+    public String todoTask(String userInput) {
+        String taskInfo = "Got it. I've added this task:\n  ";
+        Task todoTask = new Task(userInput);
+        taskInfo += todoTask.show();
+        addToList(todoTask);
+        return taskInfo;
+    }
+
+    // Create a new Deadline Task
+    public String deadlineTask(String userInput) {
+        String taskInfo = "Got it. I've added this task:\n ";
+        String[] parts = userInput.split("/");
+        Deadline deadlineTask = new Deadline(parts[0], parts[1]);
+        taskInfo += deadlineTask.show();
+        addToList(deadlineTask);
+        return taskInfo;
+    }
+
+    // Create a new Event Task
+    public String eventTask(String userInput) {
+        String taskInfo = "Got it. I've added this task:\n ";
+        String[] parts = userInput.split("/");
+        Event eventTask = new Event(parts[0], parts[1], parts[2]);
+        taskInfo += eventTask.show();
+        addToList(eventTask);
+        return taskInfo;
     }
 }
