@@ -78,4 +78,13 @@ public class CustomList {
         addToList(eventTask);
         return taskInfo;
     }
+
+    // Delete specified task
+    public String deleteTask(int index) {
+        index -= 1;
+        Task currentTask = this.customList.get(index);
+        String taskInfo = currentTask.show();
+        this.customList.remove(index);
+        return "Okay Boss, removed liao: \n " + taskInfo;
+    }
 }

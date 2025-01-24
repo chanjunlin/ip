@@ -12,6 +12,6 @@ public class Event extends Task {
     }
 
     public String show() {
-        return super.show() + "(from: " + this.starting + " to:" + this.ending + ")";
+        return super.show() + "(from: " + this.starting + " to: " + this.ending + ")";
     }
 }

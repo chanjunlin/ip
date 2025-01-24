@@ -115,6 +115,14 @@ public class ChinChin {
                     String eventInfo = customList.eventTask(parts[1]);
                     printInfo(eventInfo);
                     break;
+                case ("delete"):
+                    if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                        throw new ChinChinException("What can I delete if you don't specify the number?");
+                    }
+
+                    String deleteInfo = customList.deleteTask(Integer.parseInt(parts[1].trim()));
+                    printInfo(deleteInfo);
+                    break;
                 default:
                     System.out.println("\n" + line);
                     System.out.println("What do you mean?");
