@@ -1,11 +1,10 @@
 public class Deadline extends Task {
     private String dueDate;
 
-    public Deadline(String task, String date) {
-        super(task);
+    public Deadline(String task, TaskType taskType, String date) {
+        super(task, taskType);
         String[] correctedDate = date.split(" ", 2);
         this.dueDate = correctedDate[1];
-        this.taskTag = "[D]";
     }
 
     public String show() {

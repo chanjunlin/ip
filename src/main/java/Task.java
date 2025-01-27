@@ -1,10 +1,11 @@
 public class Task {
     protected boolean isDone = false;
     protected String taskName;
-    protected String taskTag = "[T]";
+    protected TaskType taskTag;
 
-    public Task(String task) {
+    public Task(String task, TaskType taskTag) {
         this.taskName = task;
+        this.taskTag = taskTag;
     }
 
     // Mark isDone -> true
@@ -21,12 +22,12 @@ public class Task {
 
     // Get the Task's tag
     public String getTag() {
-        return this.taskTag;
+        return this.taskTag.getTag();
     }
 
     // return [X] if task is marked, [ ] if tasked is not marked
     public String show() {
         String header = (isDone ? "[X]" : "[ ]");
-        return getTag() + header + " " + this.taskName;
+        return this.taskTag.getTag() + header + " " + this.taskName;
     }
 }

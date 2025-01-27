@@ -53,7 +53,7 @@ public class CustomList {
     // Create a new Todo Task
     public String todoTask(String userInput) {
         String taskInfo = "Got it. I've added this task:\n  ";
-        Task todoTask = new Task(userInput);
+        Task todoTask = new Task(userInput, TaskType.TODO);
         taskInfo += todoTask.show();
         addToList(todoTask);
         return taskInfo;
@@ -63,7 +63,7 @@ public class CustomList {
     public String deadlineTask(String userInput) {
         String taskInfo = "Got it. I've added this task:\n ";
         String[] parts = userInput.split("/");
-        Deadline deadlineTask = new Deadline(parts[0], parts[1]);
+        Deadline deadlineTask = new Deadline(parts[0], TaskType.DEADLINE, parts[1]);
         taskInfo += deadlineTask.show();
         addToList(deadlineTask);
         return taskInfo;
@@ -73,7 +73,7 @@ public class CustomList {
     public String eventTask(String userInput) {
         String taskInfo = "Got it. I've added this task:\n ";
         String[] parts = userInput.split("/");
-        Event eventTask = new Event(parts[0], parts[1], parts[2]);
+        Event eventTask = new Event(parts[0], TaskType.EVENT, parts[1], parts[2]);
         taskInfo += eventTask.show();
         addToList(eventTask);
         return taskInfo;
