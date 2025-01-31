@@ -1,3 +1,6 @@
+/**
+ * Custom class for handling exceptions
+ */
 public class ChinChinException extends Exception {
     private static String line = "-------------------------------------";
 
@@ -8,7 +11,7 @@ public class ChinChinException extends Exception {
     // A method to format the error message with the desired structure
     private static String formatMessage(String message) {
         return  "\n" + line +"\n"
-                + " Pause! " + message + "\n"
+                + " Eh wait! " + message + "\n"
                 + line + "\n";
     }
 }
