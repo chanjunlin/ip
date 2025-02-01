@@ -102,7 +102,7 @@ public class ChinChin {
                     throw new ChinChinException("There is no description for the task.");
                 }
 
-                String todoInfo = customList.todoTask(parts[1]);
+                String todoInfo = customList.todoTask(userInput);
                 printInfo(todoInfo);
                 break;
             case ("deadline"):
@@ -115,7 +115,7 @@ public class ChinChin {
                     throw new ChinChinException("Deadlines must include '/by' followed by a due date.");
                 }
 
-                String deadlineInfo = customList.deadlineTask(parts[1]);
+                String deadlineInfo = customList.deadlineTask(userInput);
                 printInfo(deadlineInfo);
                 break;
             case ("event"):
@@ -128,7 +128,7 @@ public class ChinChin {
                     throw new ChinChinException("Events must include '/from' followed by start time and " +
                             "'/to' followed by end time.");
                 }
-                String eventInfo = customList.eventTask(parts[1]);
+                String eventInfo = customList.eventTask(userInput);
                 printInfo(eventInfo);
                 break;
             case ("delete"):

@@ -39,6 +39,13 @@ public class Storage {
     public void createNewFile() {
         try {
             File newFile = new File(FILEPATH);
+
+            File parentDir = newFile.getParentFile();
+
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+
             boolean created = newFile.createNewFile();
         } catch (IOException e) {
             System.out.println("Paisei, got something wrong. Your todo list might not be saved.");
@@ -52,7 +59,6 @@ public class Storage {
      */
     public CustomList loadTasks() {
         CustomList taskList = new CustomList();
-
         try (BufferedReader reader = new BufferedReader(new FileReader(FILEPATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -60,9 +66,9 @@ public class Storage {
                 taskList.addToList(task);
             }
         } catch (IOException e) {
-            System.out.println("Something wrong while loading tasks");
+            System.out.println("Paisei got error: " + e.getMessage());
         } catch (ChinChinException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + " I don't know why got error");
         }
         return taskList;
     }
@@ -79,18 +85,19 @@ public class Storage {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Something wrong while saving tasks");
+            System.out.println("Paisei got error: " + e.getMessage());
         }
     }
 
     /**
-     * Converts a Task object into its string representation during the saving process.
+     * Retrieves the Task details and return them in a string
      *
      * @param task The task object to convert.
      * @return The string representation of this Task for storing
      */
     public String taskToString(Task task) {
-        return task.show();
+        String lineToWrite = task.isDone() + " " + task.getUserInput();
+        return lineToWrite;
     }
 
     /**
@@ -101,47 +108,29 @@ public class Storage {
      * @throws ChinChinException If there is an error parsing / invalid format is detected.
      */
     public Task checkTask(String line) throws ChinChinException {
-        char taskType = line.charAt(1);
-        boolean isDone = line.charAt(4) == 'X';
-        if (isDone) {
-            String[] parts = line.split(" ", 3);
-        } else {
-            String[] parts = line.split(" ", 2);
-        }
+        String[] parts = line.split(" ", 3);
+        String isDone = parts[0];
+        String command = parts[1].toLowerCase();
+        String taskDescription = parts[2];
+        String userInput = command + " " + taskDescription;
 
         try {
-            switch (taskType) {
-            case 'T':
-                String descriptionT = line.substring(line.indexOf("] ") + 2).trim();
-                Task todoTask = new Task(descriptionT, TaskType.TODO);
-                if (isDone) {
+            switch (command) {
+            case ("todo"):
+                Task todoTask = CustomList.createTodoTask(userInput);
+                if (isDone.equals("true")) {
                     todoTask.mark();
                 }
                 return todoTask;
-            case 'D':
-                int descEndIndexD = line.indexOf("(by:");
-                String descriptionD = line.substring(line.indexOf("] ") + 2, descEndIndexD).trim();
-                String dueDateD = line.substring(descEndIndexD + 4, line.lastIndexOf(")")).trim();
-                dueDateD = "/by " + dueDateD;
-                Task deadlineTask = new Deadline(descriptionD, TaskType.DEADLINE, dueDateD);
-                if (isDone) {
+            case ("deadline"):
+                Deadline deadlineTask = CustomList.createDeadlineTask(userInput);
+                if (isDone.equals("true")) {
                     deadlineTask.mark();
                 }
                 return deadlineTask;
-            case 'E':
-                int descEndIndexE = line.indexOf("(from:");
-                String descriptionE = line.substring(line.indexOf("] ") + 2, descEndIndexE).trim();
-                String timeRange = line.substring(descEndIndexE + 6, line.lastIndexOf(")")).trim();
-
-                String[] times = timeRange.split("to:");
-                if (times.length != 2) {
-                    throw new ChinChinException("Invalid event time range format!");
-                }
-                String startTime = times[0].trim();
-                String endTime = times[1].trim();
-
-                Task eventTask = new Event(descriptionE, TaskType.TODO, startTime, endTime);
-                if (isDone) {
+            case ("event"):
+                Event eventTask = CustomList.createEventTask(userInput);
+                if (isDone.equals("true")) {
                     eventTask.mark();
                 }
                 return eventTask;
@@ -149,7 +138,7 @@ public class Storage {
                 throw new ChinChinException("Jialat... got problem");
             }
         } catch (Exception e) {
-            throw new ChinChinException(e.getMessage());
+            throw new ChinChinException(e.getMessage() + " I don't know why got problem sia");
         }
     }
 }
