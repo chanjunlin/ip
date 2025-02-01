@@ -8,9 +8,14 @@ public class ChinChinException extends Exception {
         super(formatMessage(message));
     }
 
-    // A method to format the error message with the desired structure
+    /**
+     * To format the message
+     *
+      * @param message The message to be formatted
+     * @return The formatted message
+     */
     private static String formatMessage(String message) {
-        return  "\n" + line +"\n"
+        return "\n" + line + "\n"
                 + " Eh wait! " + message + "\n"
                 + line + "\n";
     }

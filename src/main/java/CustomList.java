@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 /**
@@ -5,13 +6,12 @@ import java.util.ArrayList;
  */
 public class CustomList {
 
-    // ArrayList of Task to keep track of tasks
-    private ArrayList<Task> customList = new ArrayList<Task>();
-    private final String STRINGINFO = "Oki, I add this task for you\n ";
-    private Storage storage;
+    private static ArrayList<Task> customList = new ArrayList<Task>();
+    private static final String STRINGINFO = "Oki, I add this task for you\n ";
+    private static Storage storage;
 
     public CustomList() {
-        this.storage = new Storage();
+        storage = new Storage();
     }
 
     /**
@@ -19,8 +19,8 @@ public class CustomList {
      *
      * @param task The task to be added
      */
-    public void addToList(Task task) {
-        this.customList.add(task);
+    public static void addToList(Task task) {
+        customList.add(task);
     }
 
     /**
@@ -28,20 +28,20 @@ public class CustomList {
      *
      * @return The number of tasks in the list
      */
-    public int size() {
-        return this.customList.size();
+    public static int size() {
+        return customList.size();
     }
 
     /**
      * Display all tasks in the list with their index number
      */
-    public void showList() {
-        if (this.customList.size() == 0) { // if ArrayList is empty, let the user know
-            System.out.println("List is empty!");
+    public static void showList() {
+        if (customList.size() == 0) { // if ArrayList is empty, let the user know
+            System.out.println("List empty la");
         } else { // else show everything in the list
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < this.customList.size(); i++) {
-                System.out.println((i + 1) + ". " + (String) this.customList.get(i).show());
+            for (int i = 0; i < customList.size(); i++) {
+                System.out.println((i + 1) + ". " + (String) customList.get(i).show());
             }
         }
     }
@@ -51,9 +51,9 @@ public class CustomList {
      *
      * @param index The index number of task to be marked
      */
-    public void markTask(int index) {
+    public static void markTask(int index) {
         index -= 1;
-        Task currentTask = this.customList.get(index);
+        Task currentTask = customList.get(index);
         currentTask.mark();
         updateList();
         String taskInfo = currentTask.show();
@@ -66,9 +66,9 @@ public class CustomList {
      *
      * @param index The index number of task to be unmarked
      */
-    public void unmarkTask(int index) {
+    public static void unmarkTask(int index) {
         index -= 1;
-        Task currentTask = this.customList.get(index);
+        Task currentTask = customList.get(index);
         currentTask.unmark();
         updateList();
         String taskInfo = currentTask.show();
@@ -77,14 +77,14 @@ public class CustomList {
     }
 
     /**
-     * Create a new TODO task
+     * Calls createTodoTask to create a new TODO task
      *
-     * @param userInput The task description
+     * @param userInput The user's input
      * @return The task description
      */
-    public String todoTask(String userInput) {
-        String taskInfo = this.STRINGINFO;
-        Task todoTask = new Task(userInput, TaskType.TODO);
+    public static String todoTask(String userInput) {
+        String taskInfo = STRINGINFO;
+        Task todoTask = createTodoTask(userInput);
         taskInfo += todoTask.show();
         addToList(todoTask);
         updateList();
@@ -92,15 +92,28 @@ public class CustomList {
     }
 
     /**
-     * Create a new DEADLINE task
+     * Creates a new TODO task
      *
-     * @param userInput The task description
+     * @param userInput The user's input
+     * @return A Todo task's object
+     */
+    public static Task createTodoTask(String userInput) {
+        int todoDescIndex = userInput.indexOf("todo");
+        String todoDesc = userInput.substring(todoDescIndex + "todo ".length()).trim();
+
+        return new Task(todoDesc, TaskType.TODO, userInput);
+    }
+
+
+    /**
+     * Calls createDeadlineTask to create a new DEADLINE task
+     *
+     * @param userInput The user's input
      * @return The task description
      */
-    public String deadlineTask(String userInput) {
-        String taskInfo = this.STRINGINFO;
-        String[] parts = userInput.split("/");
-        Deadline deadlineTask = new Deadline(parts[0], TaskType.DEADLINE, parts[1]);
+    public static String deadlineTask(String userInput) {
+        String taskInfo = STRINGINFO;
+        Deadline deadlineTask = createDeadlineTask(userInput);
         taskInfo += deadlineTask.show();
         addToList(deadlineTask);
         updateList();
@@ -108,19 +121,54 @@ public class CustomList {
     }
 
     /**
-     * Create a new EVENT task
+     * Create a new DEADLINE task
      *
-     * @param userInput The task description
+     * @param userInput The user's input
+     * @return A Deadline task's object
+     */
+    public static Deadline createDeadlineTask(String userInput) {
+        int deadlineDescIndex = userInput.indexOf("deadline ") + "deadline ".length();
+        String deadlineDesc = userInput.substring(deadlineDescIndex, userInput.indexOf("/by")).trim();
+
+        int byIndex = userInput.indexOf("/by");
+        String afterBy = userInput.substring(byIndex + "/by ".length()).trim();
+
+        return new Deadline(deadlineDesc, TaskType.DEADLINE, afterBy, userInput);
+    }
+
+
+    /**
+     * Calls createEventTask to create an EVENT task
+     *
+     * @param userInput The user's input
      * @return The task description
      */
-    public String eventTask(String userInput) {
-        String taskInfo = this.STRINGINFO;
-        String[] parts = userInput.split("/");
-        Event eventTask = new Event(parts[0], TaskType.EVENT, parts[1], parts[2]);
+    public static String eventTask(String userInput) {
+        String taskInfo = STRINGINFO;
+        Event eventTask = createEventTask(userInput);
         taskInfo += eventTask.show();
         addToList(eventTask);
         updateList();
         return taskInfo;
+    }
+
+    /**
+     * Creates a new EVENT task
+     *
+     * @param userInput The user's input
+     * @return A Event task's object
+     */
+    public static Event createEventTask(String userInput) {
+        int eventDescIndex = userInput.indexOf("event ") + "event ".length();
+        String eventDesc = userInput.substring(eventDescIndex, userInput.indexOf("/from")).trim();
+
+        int fromIndex = userInput.indexOf("/from ") + "/from ".length();
+        int toIndex = userInput.indexOf("/to");
+        String betweenFromAndTo = userInput.substring(fromIndex, toIndex).trim();
+
+        String afterTo = userInput.substring(toIndex + "/to ".length()).trim();
+
+        return new Event(eventDesc, TaskType.EVENT, betweenFromAndTo, afterTo, userInput);
     }
 
     /**
@@ -129,19 +177,20 @@ public class CustomList {
      * @param index The index of the task to be deleted.
      * @return Information about deleted task or an error message if invalid index is provided.
      */
-    public String deleteTask(int index) {
+    public static String deleteTask(int index) {
         index -= 1;
-        Task currentTask = this.customList.get(index);
+        Task currentTask = customList.get(index);
         String taskInfo = currentTask.show();
-        this.customList.remove(index);
+        customList.remove(index);
         updateList();
         return "Okay Boss, removed liao: \n " + taskInfo;
     }
 
     /**
-     *  Updates the list when there is any changes done to the list
+     * Updates the list when there is any changes done to the list
      */
-    public void updateList() {
-        storage.updateList(this.customList);
+    public static void updateList() {
+        storage.updateList(customList);
     }
+
 }
