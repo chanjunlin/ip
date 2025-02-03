@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * Represents a storage class that handles all the miscellaneous tasks
  */
 public class Storage {
-    private final String FILEPATH = "./data/ChinChinList.txt";
+    private final String FILEPATH;
 
-    public Storage() {
-
+    public Storage(String filePath) {
+        this.FILEPATH = filePath;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Storage {
             return loadTasks();
         } else {
             createNewFile();
-            return new CustomList();
+            return new CustomList(FILEPATH);
         }
     }
 
@@ -58,7 +58,8 @@ public class Storage {
      * @return A CustomList containing all tasks read from the text file
      */
     public CustomList loadTasks() {
-        CustomList taskList = new CustomList();
+        CustomList taskList = new CustomList(FILEPATH);
+        taskList.setStorage(this);
         try (BufferedReader reader = new BufferedReader(new FileReader(FILEPATH))) {
             String line;
             while ((line = reader.readLine()) != null) {

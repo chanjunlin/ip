@@ -16,13 +16,9 @@ public class Deadline extends Task {
      * @param date      The input string containing the due date
      * @param userInput The user input to get the description of the task
      */
-    public Deadline(String task, TaskType taskType, String date, String userInput) {
+    public Deadline(String task, TaskType taskType, String date, String userInput) throws ChinChinException {
         super(task, taskType, userInput);
-        try {
-            this.dueDate = parseDate(date);
-        } catch (ChinChinException e) {
-            System.out.println(e.getMessage());
-        }
+        this.dueDate = parseDate(date);
     }
 
     /**
@@ -39,10 +35,11 @@ public class Deadline extends Task {
     /**
      * Parses a date string into a LocalDateTime object based on supported date formats in DateFormatter
      *
-     * @param DateString The input string to be parsed
+     * @param dateString The input string to be parsed
      * @return A LocalDateTime object representing the parsed date and time.
      * @throws ChinChinException If no matching format is found, indicating an unsupported or invalid format.
      */
+
     public LocalDateTime parseDate(String dateString) throws ChinChinException {
         for (DateTimeFormatter format : DateFormatter.DATEFORMAT) {
             try {
