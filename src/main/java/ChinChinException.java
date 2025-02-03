@@ -4,6 +4,11 @@
 public class ChinChinException extends Exception {
     private static String line = "-------------------------------------";
 
+    /**
+     * constructs a new ChinChinException with a formatted message
+     *
+     * @param message The error message to be included in this exception
+     */
     public ChinChinException(String message) {
         super(formatMessage(message));
     }
@@ -16,7 +21,7 @@ public class ChinChinException extends Exception {
      */
     private static String formatMessage(String message) {
         return "\n" + line + "\n"
-                + " Eh wait! " + message + "\n"
+                + "Walao, " + message + "\n"
                 + line + "\n";
     }
 }
