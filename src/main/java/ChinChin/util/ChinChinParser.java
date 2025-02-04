@@ -1,3 +1,12 @@
+package ChinChin.util;
+
+import ChinChin.command.*;
+import ChinChin.main.*;
+import ChinChin.storage.*;
+import ChinChin.task.*;
+import ChinChin.ui.*;
+import ChinChin.util.*;
+
 /**
  * Parses the user input and maps it to a specific ChinChinCommand
  */

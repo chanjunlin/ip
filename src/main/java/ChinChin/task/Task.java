@@ -1,3 +1,5 @@
+package ChinChin.task;
+
 /**
  * Represents a generic task with a completion status and a name.
  */
@@ -25,7 +27,6 @@ public class Task {
      */
     public void mark() {
         this.isDone = true;
-        return;
     }
 
     /**
@@ -33,7 +34,6 @@ public class Task {
      */
     public void unmark() {
         this.isDone = false;
-        return;
     }
 
     /**
@@ -71,5 +71,9 @@ public class Task {
     public String show() {
         String header = (isDone ? "[X]" : "[ ]");
         return this.taskTag.getTag() + header + " " + this.taskName;
+    }
+
+    public String getTaskDescription() {
+        return this.taskName;
     }
 }

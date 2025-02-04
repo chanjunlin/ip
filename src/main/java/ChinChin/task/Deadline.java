@@ -1,3 +1,8 @@
+package ChinChin.task;
+
+import ChinChin.util.ChinChinException;
+import ChinChin.util.DateFormatter;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -26,6 +31,7 @@ public class Deadline extends Task {
      *
      * @return A reformatted string showing whether it's completed and its details including due date.
      */
+    @Override
     public String show() {
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         return super.show() + " (by: " + this.dueDate.format(displayFormatter) + ")";

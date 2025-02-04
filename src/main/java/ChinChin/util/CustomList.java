@@ -1,4 +1,13 @@
+package ChinChin.util;
+
 import java.util.ArrayList;
+
+import ChinChin.command.*;
+import ChinChin.main.*;
+import ChinChin.storage.*;
+import ChinChin.task.*;
+import ChinChin.ui.*;
+import ChinChin.util.*;
 
 /**
  * Custom list class to manage the collection of tasks
@@ -7,7 +16,7 @@ public class CustomList {
 
     private static ArrayList<Task> customList = new ArrayList<Task>();
     private static final String STRINGINFO = "Oki, I add this task for you:\n ";
-    private Storage storage;
+    public Storage storage;
     private String FILEPATH;
 
     /**
@@ -267,4 +276,9 @@ public class CustomList {
         this.storage.updateList(customList);
     }
 
+    public Task getTask(int Index) {
+        Task retrievedTask = this.customList.get(Index);
+        System.out.println(retrievedTask.show());
+        return retrievedTask;
+    }
 }

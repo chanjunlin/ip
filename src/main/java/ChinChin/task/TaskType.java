@@ -1,3 +1,12 @@
+package ChinChin.task;
+
+import ChinChin.command.*;
+import ChinChin.main.*;
+import ChinChin.storage.*;
+import ChinChin.task.*;
+import ChinChin.ui.*;
+import ChinChin.util.*;
+
 /**
  * Enumeration representing the different types of tasks.
  */

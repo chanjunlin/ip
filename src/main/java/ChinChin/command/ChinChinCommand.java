@@ -1,3 +1,12 @@
+package ChinChin.command;
+
+import ChinChin.command.*;
+import ChinChin.main.*;
+import ChinChin.storage.*;
+import ChinChin.task.*;
+import ChinChin.ui.*;
+import ChinChin.util.*;
+
 /**
  * Abstract base class for all ChinChin commands
  */

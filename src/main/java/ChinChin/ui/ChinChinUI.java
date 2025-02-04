@@ -1,4 +1,13 @@
+package ChinChin.ui;
+
 import java.util.Scanner;
+
+import ChinChin.command.*;
+import ChinChin.main.*;
+import ChinChin.storage.*;
+import ChinChin.task.*;
+import ChinChin.ui.*;
+import ChinChin.util.*;
 
 /**
  * Handles all user interface interactions for the ChinChin list
