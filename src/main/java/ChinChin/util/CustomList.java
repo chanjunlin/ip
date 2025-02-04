@@ -276,6 +276,7 @@ public class CustomList {
         this.storage.updateList(customList);
     }
 
+
     public Task getTask(int Index) {
         Task retrievedTask = this.customList.get(Index);
         System.out.println(retrievedTask.show());
