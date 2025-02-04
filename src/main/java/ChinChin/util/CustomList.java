@@ -1,13 +1,13 @@
 package ChinChin.util;
 
-import java.util.ArrayList;
+import ChinChin.storage.Storage;
+import ChinChin.task.Deadline;
+import ChinChin.task.Event;
+import ChinChin.task.Task;
+import ChinChin.task.TaskType;
+import ChinChin.ui.ChinChinUI;
 
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+import java.util.ArrayList;
 
 /**
  * Custom list class to manage the collection of tasks
@@ -280,5 +280,23 @@ public class CustomList {
         Task retrievedTask = this.customList.get(Index);
         System.out.println(retrievedTask.show());
         return retrievedTask;
+    }
+
+    public void findKeyword(String keyword) {
+        boolean isEmpty = true;
+        for (int i = 0; i < customList.size(); i++) {
+            String taskDescription = customList.get(i).show();
+            if (taskDescription.contains(keyword)) {
+                if (isEmpty) {
+                    ChinChinUI.printHeader("Here's some of the matches: ");
+                }
+                ChinChinUI.printMisc(taskDescription);
+                isEmpty = false;
+            }
+        }
+        if (isEmpty) {
+            ChinChinUI.printHeader("No matches la..");
+        }
+        ChinChinUI.printBottom();
     }
 }

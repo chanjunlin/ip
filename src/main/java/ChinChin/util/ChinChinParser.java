@@ -30,14 +30,16 @@ public class ChinChinParser {
             // Fallthrough
         case ("exit"):
             return new ExitCommand();
+        case ("delete"):
+            return new DeleteCommand(userInput);
+        case ("find"):
+            return new FindCommand(userInput);
         case ("list"):
             return new ListCommand();
         case ("mark"):
             return new MarkCommand(userInput);
         case ("unmark"):
             return new UnmarkCommand(userInput);
-        case ("delete"):
-            return new DeleteCommand(userInput);
         default:
             return new AddCommand(userInput);
         }
