@@ -282,6 +282,11 @@ public class CustomList {
         return retrievedTask;
     }
 
+    /**
+     * Locate for the tasks containing the keyword
+     *
+     * @param keyword The keyword to search for
+     */
     public void findKeyword(String keyword) {
         boolean isEmpty = true;
         for (int i = 0; i < customList.size(); i++) {
