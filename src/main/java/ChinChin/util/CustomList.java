@@ -290,7 +290,7 @@ public class CustomList {
                 if (isEmpty) {
                     ChinChinUI.printHeader("Here's some of the matches: ");
                 }
-                ChinChinUI.printMisc(taskDescription);
+                ChinChinUI.printMisc(i + 1 + ". " + taskDescription);
                 isEmpty = false;
             }
         }
