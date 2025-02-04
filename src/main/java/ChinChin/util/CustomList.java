@@ -276,6 +276,12 @@ public class CustomList {
         this.storage.updateList(customList);
     }
 
+    /**
+     * Retrieve the task at the index
+     *
+     * @param Index Index of the task
+     * @return The tasks at the specific index
+     */
     public Task getTask(int Index) {
         Task retrievedTask = this.customList.get(Index);
         System.out.println(retrievedTask.show());
