@@ -31,7 +31,7 @@ public class ChinChin {
      *
      */
     public void run() {
-        chinChinUI.displayGreeting();
+        ChinChinUI.displayGreeting();
         boolean isExit = false;
         while (!isExit) {
             try {

@@ -39,7 +39,7 @@ public class Task {
     /**
      * To check if this task is marked as completed
      *
-     * @return A boolean value depending if the task is done or not
+     * @return A boolean value depending on if the task is done or not
      */
     public boolean isDone() {
         return this.isDone;

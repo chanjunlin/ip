@@ -11,7 +11,7 @@ import chin.util.DateFormatter;
  * Represent a DEADLINE task with a due date
  */
 public class Deadline extends Task {
-    private LocalDateTime dueDate;
+    private final LocalDateTime dueDate;
 
     /**
      * Constructs a Deadline object with a description and duedate
