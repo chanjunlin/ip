@@ -1,10 +1,13 @@
-package ChinChin.command;
+package chin.command;
 
-import ChinChin.storage.Storage;
-import ChinChin.ui.ChinChinUI;
-import ChinChin.util.ChinChinException;
-import ChinChin.util.CustomList;
+import chin.storage.Storage;
+import chin.ui.ChinChinUI;
+import chin.util.ChinChinException;
+import chin.util.CustomList;
 
+/**
+ * Represents a command to find tasks based on the keywords
+ */
 public class FindCommand extends ChinChinCommand {
 
     private String findString;
@@ -23,6 +26,13 @@ public class FindCommand extends ChinChinCommand {
         return false;
     }
 
+    /**
+     * Extracts the keyword from the user's input
+     *
+     * @param userInput The user's input
+     * @return The keyword
+     * @throws ChinChinException If there is no keyword to search for
+     */
     public String extractKeyword(String userInput) throws ChinChinException {
         int findIndex = userInput.indexOf("find");
         int endFindIndex = findIndex + "find ".length();
@@ -31,7 +41,6 @@ public class FindCommand extends ChinChinCommand {
             throw new ChinChinException("What can i find if the keyword is empty...");
         }
 
-        String keyword = userInput.substring(endFindIndex).trim();
-        return keyword;
+        return userInput.substring(endFindIndex).trim();
     }
 }

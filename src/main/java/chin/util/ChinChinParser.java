@@ -1,11 +1,14 @@
-package ChinChin.util;
+package chin.util;
 
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+
+import chin.command.AddCommand;
+import chin.command.ChinChinCommand;
+import chin.command.DeleteCommand;
+import chin.command.ExitCommand;
+import chin.command.FindCommand;
+import chin.command.ListCommand;
+import chin.command.MarkCommand;
+import chin.command.UnmarkCommand;
 
 /**
  * Parses the user input and maps it to a specific ChinChinCommand

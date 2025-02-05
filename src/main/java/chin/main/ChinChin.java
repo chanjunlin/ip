@@ -1,18 +1,11 @@
-package ChinChin.main;
+package chin.main;
 
-import java.util.Scanner;
-
-import ChinChin.storage.Storage;
-import ChinChin.ui.ChinChinUI;
-import ChinChin.util.ChinChinException;
-import ChinChin.util.ChinChinParser;
-import ChinChin.util.CustomList;
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+import chin.command.ChinChinCommand;
+import chin.storage.Storage;
+import chin.ui.ChinChinUI;
+import chin.util.ChinChinException;
+import chin.util.ChinChinParser;
+import chin.util.CustomList;
 
 /**
  * Main application class for managing tasks

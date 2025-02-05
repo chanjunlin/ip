@@ -1,13 +1,9 @@
-package ChinChin.command;
+package chin.command;
 
-import ChinChin.util.ChinChinException;
-import ChinChin.util.CustomList;
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+import chin.storage.Storage;
+import chin.ui.ChinChinUI;
+import chin.util.ChinChinException;
+import chin.util.CustomList;
 
 /**
  * Represents a command to delete a task from the task list
