@@ -13,7 +13,7 @@ public enum TaskType {
     /**
      * Constructs a TaskType with the specified tag
      *
-     * @param tag
+     * @param tag Gives the tag to the task
      */
     TaskType(String tag) {
         this.tag = tag;
