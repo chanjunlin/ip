@@ -51,7 +51,7 @@ public class ChinChinUI {
     public static void printInfo(String taskInfo, int size) {
         System.out.println("\n" + LINE_SEPARATOR);
         System.out.println(taskInfo);
-        System.out.println("Now you got " + String.valueOf(size) + " tasks in the list.");
+        System.out.println("Now you got " + size + " tasks in the list.");
         System.out.println(LINE_SEPARATOR + "\n");
     }
 
