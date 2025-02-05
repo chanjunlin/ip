@@ -1,20 +1,16 @@
-package ChinChin.command;
+package chin.command;
 
-import ChinChin.util.ChinChinException;
-import ChinChin.util.CustomList;
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+import chin.storage.Storage;
+import chin.ui.ChinChinUI;
+import chin.util.ChinChinException;
+import chin.util.CustomList;
 
 /**
  * Represents the MarkCommand that will mark the task at the specific index
  */
 public class MarkCommand extends ChinChinCommand {
 
-    private int markIndex;
+    private final int markIndex;
 
     public MarkCommand(String userInput) throws ChinChinException {
         this.markIndex = extractIndex(userInput);

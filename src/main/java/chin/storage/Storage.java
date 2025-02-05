@@ -1,4 +1,4 @@
-package ChinChin.storage;
+package chin.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,21 +8,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+import chin.task.Deadline;
+import chin.task.Event;
+import chin.task.Task;
+import chin.util.ChinChinException;
+import chin.util.CustomList;
 
 /**
  * Represents a storage class that handles all the miscellaneous tasks
  */
 public class Storage {
-    private final String FILEPATH;
+    private final String filePath;
 
     public Storage(String filePath) {
-        this.FILEPATH = filePath;
+        this.filePath = filePath;
     }
 
     /**
@@ -33,12 +32,12 @@ public class Storage {
      * @return A CustomList containing tasks loaded from the the textfile or an empty CustomList if no file exists.
      */
     public CustomList initialiseTasks() {
-        File file = new File(FILEPATH);
+        File file = new File(filePath);
         if (file.exists()) {
             return loadTasks();
         } else {
             createNewFile();
-            return new CustomList(FILEPATH);
+            return new CustomList(filePath);
         }
     }
 
@@ -47,7 +46,7 @@ public class Storage {
      */
     public void createNewFile() {
         try {
-            File newFile = new File(FILEPATH);
+            File newFile = new File(filePath);
 
             File parentDir = newFile.getParentFile();
 
@@ -55,7 +54,7 @@ public class Storage {
                 parentDir.mkdirs();
             }
 
-            boolean created = newFile.createNewFile();
+            newFile.createNewFile();
         } catch (IOException e) {
             System.out.println("Paisei, got something wrong. Your todo list might not be saved.");
         }
@@ -67,9 +66,9 @@ public class Storage {
      * @return A CustomList containing all tasks read from the text file
      */
     public CustomList loadTasks() {
-        CustomList taskList = new CustomList(FILEPATH);
+        CustomList taskList = new CustomList(filePath);
         taskList.setStorage(this);
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILEPATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Task task = checkTask(line);
@@ -89,7 +88,7 @@ public class Storage {
      * @param taskList The ArrayList of Task objects to save to the text file
      */
     public void updateList(ArrayList<Task> taskList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILEPATH))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Task task : taskList) {
                 writer.write(taskToString(task));
                 writer.newLine();

@@ -1,20 +1,13 @@
-package ChinChin.ui;
+package chin.ui;
 
 import java.util.Scanner;
-
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
 
 /**
  * Handles all user interface interactions for the ChinChin list
  */
 public class ChinChinUI {
-    private static String LINE_SEPARATOR = "-------------------------------------";
-    private Scanner scanner;
+    private static final String LINE_SEPARATOR = "-------------------------------------";
+    private final Scanner scanner;
 
     /**
      * Constructs a new ChinChin instance

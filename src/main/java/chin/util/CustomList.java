@@ -1,23 +1,23 @@
-package ChinChin.util;
-
-import ChinChin.storage.Storage;
-import ChinChin.task.Deadline;
-import ChinChin.task.Event;
-import ChinChin.task.Task;
-import ChinChin.task.TaskType;
-import ChinChin.ui.ChinChinUI;
+package chin.util;
 
 import java.util.ArrayList;
+
+import chin.storage.Storage;
+import chin.task.Deadline;
+import chin.task.Event;
+import chin.task.Task;
+import chin.task.TaskType;
+import chin.ui.ChinChinUI;
 
 /**
  * Custom list class to manage the collection of tasks
  */
 public class CustomList {
 
-    private static ArrayList<Task> customList = new ArrayList<Task>();
+    private static ArrayList<Task> customList;
     private static final String STRINGINFO = "Oki, I add this task for you:\n ";
-    public Storage storage;
-    private String FILEPATH;
+    private Storage storage;
+    private String filePath;
 
     /**
      * Create a new custom list with the file path to write to
@@ -25,7 +25,8 @@ public class CustomList {
      * @param filePath The file path to write to
      */
     public CustomList(String filePath) {
-        FILEPATH = filePath;
+        customList = new ArrayList<Task>();
+        this.filePath = filePath;
     }
 
     /**
@@ -59,7 +60,7 @@ public class CustomList {
      * Display all tasks in the list with their index number
      */
     public void showList() {
-        if (customList.size() == 0) { // if ArrayList is empty, let the user know
+        if (customList.isEmpty()) { // if ArrayList is empty, let the user know
             ChinChinUI.printHeader("List empty la");
             ChinChinUI.showLine();
         } else { // else show everything in the list
@@ -228,16 +229,8 @@ public class CustomList {
      *                           or the ending time is missing
      */
     public static Event createEventTask(String userInput) throws ChinChinException {
-        int eventDescIndex = userInput.indexOf("event ") + "event ".length();
-        if ("event ".length() > userInput.length()) {
-            throw new ChinChinException("bro your event task got no description");
-        } else if (!userInput.contains("/from")) {
-            throw new ChinChinException("if you don\'t state the starting, then just use \'deadline\' feature");
-        } else if (!userInput.contains("/to")) {
-            throw new ChinChinException("no ending then isn\'t it the same as a normal task..");
-        }
-
-        String eventDesc = userInput.substring(eventDescIndex, userInput.indexOf("/from")).trim();
+        String eventString = "event ";
+        String eventDesc = getString(userInput, eventString);
 
         int fromIndex = userInput.indexOf("/from ") + "/from ".length();
         int toIndex = userInput.indexOf("/to");
@@ -246,6 +239,28 @@ public class CustomList {
         String afterTo = userInput.substring(toIndex + "/to ".length()).trim();
 
         return new Event(eventDesc, TaskType.EVENT, betweenFromAndTo, afterTo, userInput);
+    }
+
+    /**
+     * Returns a String from the user's Input
+     *
+     * @param userInput   The user's input
+     * @param eventString The String "event "
+     * @return The event's description
+     * @throws ChinChinException If there is no event description, if there is no starting timing,
+     *                           if there is no ending deadline
+     */
+    private static String getString(String userInput, String eventString) throws ChinChinException {
+        int eventDescIndex = userInput.indexOf(eventString) + eventString.length();
+        if (eventString.length() > userInput.length()) {
+            throw new ChinChinException("bro your event task got no description");
+        } else if (!userInput.contains("/from")) {
+            throw new ChinChinException("if you don't state the starting, then just use 'deadline' feature");
+        } else if (!userInput.contains("/to")) {
+            throw new ChinChinException("no ending then isn't it the same as a normal task..");
+        }
+
+        return userInput.substring(eventDescIndex, userInput.indexOf("/from")).trim();
     }
 
     /**
@@ -279,11 +294,11 @@ public class CustomList {
     /**
      * Retrieve the task at the index
      *
-     * @param Index Index of the task
+     * @param index Index of the task
      * @return The tasks at the specific index
      */
-    public Task getTask(int Index) {
-        Task retrievedTask = this.customList.get(Index);
+    public Task getTask(int index) {
+        Task retrievedTask = customList.get(index);
         System.out.println(retrievedTask.show());
         return retrievedTask;
     }

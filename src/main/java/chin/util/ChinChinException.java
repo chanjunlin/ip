@@ -1,11 +1,4 @@
-package ChinChin.util;
-
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+package chin.util;
 
 /**
  * Custom class for handling exceptions
@@ -25,7 +18,7 @@ public class ChinChinException extends Exception {
     /**
      * To format the message
      *
-      * @param message The message to be formatted
+     * @param message The message to be formatted
      * @return The formatted message
      */
     private static String formatMessage(String message) {

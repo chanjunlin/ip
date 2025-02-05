@@ -1,4 +1,4 @@
-package ChinChin.task;
+package chin.task;
 
 /**
  * Represents a generic task with a completion status and a name.

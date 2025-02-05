@@ -1,11 +1,9 @@
-package ChinChin.command;
+package chin.command;
 
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+import chin.storage.Storage;
+import chin.ui.ChinChinUI;
+import chin.util.ChinChinException;
+import chin.util.CustomList;
 
 /**
  * Represents the ExitCommand to end the program

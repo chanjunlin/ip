@@ -1,19 +1,12 @@
-package ChinChin.task;
-
-import ChinChin.command.*;
-import ChinChin.main.*;
-import ChinChin.storage.*;
-import ChinChin.task.*;
-import ChinChin.ui.*;
-import ChinChin.util.*;
+package chin.task;
 
 /**
  * Enumeration representing the different types of tasks.
  */
 public enum TaskType {
-    TODO("[T]"),        // Represents TODO task
-    DEADLINE("[D]"),    // Represents DEADLINE task
-    EVENT("[E]");       // Represents EVENT task
+    TODO("[T]"),
+    DEADLINE("[D]"),
+    EVENT("[E]");
 
     private final String tag;
 
