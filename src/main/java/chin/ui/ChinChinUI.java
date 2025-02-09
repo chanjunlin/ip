@@ -25,22 +25,20 @@ public class ChinChinUI {
 
     /**
      * Display bot's greeting message.
+     *
+     * @return
      */
-    public static void displayGreeting() {
-        String greetings = "Nihao, I'm ChinChin\nWhat you want?";
-        System.out.println(LINE_SEPARATOR);
-        System.out.println(greetings);
-        System.out.println(LINE_SEPARATOR + "\n");
+    public static String displayGreeting() {
+        return "Nihao, I'm ChinChin\nWhat you want?";
     }
 
     /**
      * Display bot's farewell message.
+     *
+     * @return
      */
-    public static void goodbye() {
-        String goodbyes = "Bye. Hope to see you again soon!";
-        System.out.println("\n" + LINE_SEPARATOR);
-        System.out.println(goodbyes);
-        System.out.println(LINE_SEPARATOR + "\n");
+    public static String goodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -48,11 +46,8 @@ public class ChinChinUI {
      *
      * @param taskInfo The information about the task being displayed.
      */
-    public static void printInfo(String taskInfo, int size) {
-        System.out.println("\n" + LINE_SEPARATOR);
-        System.out.println(taskInfo);
-        System.out.println("Now you got " + size + " tasks in the list.");
-        System.out.println(LINE_SEPARATOR + "\n");
+    public static String printInfo(String taskInfo, int size) {
+        return taskInfo + "\nNow you got " + size + " tasks in the list.";
     }
 
 

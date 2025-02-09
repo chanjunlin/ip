@@ -2,10 +2,12 @@ package chin.util;
 
 
 import chin.command.AddCommand;
+import chin.command.BadCommand;
 import chin.command.ChinChinCommand;
 import chin.command.DeleteCommand;
 import chin.command.ExitCommand;
 import chin.command.FindCommand;
+import chin.command.GreetingCommand;
 import chin.command.ListCommand;
 import chin.command.MarkCommand;
 import chin.command.UnmarkCommand;
@@ -33,6 +35,12 @@ public class ChinChinParser {
             // Fallthrough
         case ("exit"):
             return new ExitCommand();
+        case ("hi"):
+            // Fallthrough
+        case ("hello"):
+            // Fallthrough
+        case ("greetings"):
+            return new GreetingCommand(userInput);
         case ("delete"):
             return new DeleteCommand(userInput);
         case ("find"):
@@ -43,8 +51,14 @@ public class ChinChinParser {
             return new MarkCommand(userInput);
         case ("unmark"):
             return new UnmarkCommand(userInput);
-        default:
+        case ("todo"):
+            // Fallthrough
+        case ("deadline"):
+            // Fallthrough
+        case ("event"):
             return new AddCommand(userInput);
+        default:
+            return new BadCommand(userInput);
         }
     }
 }

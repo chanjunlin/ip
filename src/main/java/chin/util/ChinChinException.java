@@ -22,8 +22,6 @@ public class ChinChinException extends Exception {
      * @return The formatted message
      */
     private static String formatMessage(String message) {
-        return "\n" + line + "\n"
-                + "Walao, " + message + "\n"
-                + line + "\n";
+        return message;
     }
 }

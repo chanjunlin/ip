@@ -31,8 +31,8 @@ public class DeleteCommand extends ChinChinCommand {
      * @throws ChinChinException If there is any errors executing the command
      */
     @Override
-    public void execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        taskList.deleteTask(this.deleteIndex);
+    public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
+        return taskList.deleteTask(this.deleteIndex);
     }
 
     /**
@@ -67,5 +67,15 @@ public class DeleteCommand extends ChinChinCommand {
         } catch (NumberFormatException e) {
             throw new ChinChinException("key in proper number please");
         }
+    }
+
+    /**
+     * Command Type
+     *
+     * @return The commandType
+     */
+    @Override
+    public String getcommandType() {
+        return "delete";
     }
 }

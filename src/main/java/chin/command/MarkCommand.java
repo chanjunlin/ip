@@ -25,8 +25,8 @@ public class MarkCommand extends ChinChinCommand {
      * @throws ChinChinException If there is any errors executing the command
      */
     @Override
-    public void execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        taskList.markTask(this.markIndex);
+    public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
+        return taskList.markTask(this.markIndex);
     }
 
     /**
@@ -63,5 +63,15 @@ public class MarkCommand extends ChinChinCommand {
         } catch (IndexOutOfBoundsException e) {
             throw new ChinChinException("er.. check again! The list not that long.");
         }
+    }
+
+    /**
+     * Command Type
+     *
+     * @return The commandType
+     */
+    @Override
+    public String getcommandType() {
+        return "mark";
     }
 }
