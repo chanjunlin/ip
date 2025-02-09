@@ -17,8 +17,8 @@ public class FindCommand extends ChinChinCommand {
     }
 
     @Override
-    public void execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        taskList.findKeyword(this.findString);
+    public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
+        return taskList.findKeyword(this.findString);
     }
 
     @Override
@@ -42,5 +42,15 @@ public class FindCommand extends ChinChinCommand {
         }
 
         return userInput.substring(endFindIndex).trim();
+    }
+
+    /**
+     * Command Type
+     *
+     * @return The commandType
+     */
+    @Override
+    public String getcommandType() {
+        return "find";
     }
 }

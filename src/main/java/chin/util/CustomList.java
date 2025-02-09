@@ -7,7 +7,6 @@ import chin.task.Deadline;
 import chin.task.Event;
 import chin.task.Task;
 import chin.task.TaskType;
-import chin.ui.ChinChinUI;
 
 /**
  * Custom list class to manage the collection of tasks
@@ -58,18 +57,20 @@ public class CustomList {
 
     /**
      * Display all tasks in the list with their index number
+     *
+     * @return
      */
-    public void showList() {
+    public String showList() {
+        StringBuilder returnString = new StringBuilder();
         if (customList.isEmpty()) { // if ArrayList is empty, let the user know
-            ChinChinUI.printHeader("List empty la");
-            ChinChinUI.showLine();
+            returnString.append("List empty la");
         } else { // else show everything in the list
-            ChinChinUI.printHeader("Here are the tasks in your list:");
+            returnString.append("Here are the tasks in your list: ").append("\n");
             for (int i = 0; i < customList.size(); i++) {
-                ChinChinUI.printMisc((i + 1) + ". " + (String) customList.get(i).show());
+                returnString.append((i + 1)).append(". ").append(customList.get(i).show()).append("\n");
             }
-            ChinChinUI.printBottom();
         }
+        return returnString.toString();
     }
 
     /**
@@ -78,25 +79,25 @@ public class CustomList {
      * @param index The index number of task to be marked
      * @throws ChinChinException If the list is empty or if the specified index is out of bounds
      */
-    public void markTask(int index) throws ChinChinException {
+    public String markTask(int index) throws ChinChinException {
+        StringBuilder returnString;
         try {
+            returnString = new StringBuilder();
             index -= 1;
             Task currentTask = customList.get(index);
             boolean isMarked = currentTask.isDone();
             if (!isMarked) {
                 currentTask.mark();
                 updateList();
-                String taskInfo = currentTask.show();
-                ChinChinUI.printHeader("Orh, marked the task as done liao!");
-                ChinChinUI.printMisc(taskInfo);
-                ChinChinUI.printBottom();
+                returnString.append("Orh, marked the task as done liao!");
+                returnString.append(currentTask.show());
             } else {
-                ChinChinUI.printHeader("Marked already. You mean unmark ah?");
-                ChinChinUI.printBottom();
+                returnString.append("Marked already. You mean unmark ah?");
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ChinChinException("er.. check again! The list not that long.");
         }
+        return returnString.toString();
     }
 
     /**
@@ -105,25 +106,25 @@ public class CustomList {
      * @param index The index number of task to be unmarked
      * @throws ChinChinException If the list is empty or if the specified index is out of bounds
      */
-    public void unmarkTask(int index) throws ChinChinException {
+    public String unmarkTask(int index) throws ChinChinException {
+        StringBuilder returnString;
         try {
+            returnString = new StringBuilder();
             index -= 1;
             Task currentTask = customList.get(index);
             boolean isMarked = currentTask.isDone();
             if (isMarked) {
                 currentTask.unmark();
                 updateList();
-                String taskInfo = currentTask.show();
-                ChinChinUI.printHeader("Orh, marked the task as undone liao!");
-                ChinChinUI.printMisc(taskInfo);
-                ChinChinUI.printBottom();
+                returnString.append("Orh, marked the task as undone liao!");
+                returnString.append(currentTask.show());
             } else {
-                ChinChinUI.printHeader("Not even marked. You mean mark ah?");
-                ChinChinUI.printBottom();
+                returnString.append("Not even marked. You mean mark ah?");
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ChinChinException("er.. check again! The list not that long.");
         }
+        return returnString.toString();
     }
 
     /**
@@ -269,16 +270,14 @@ public class CustomList {
      * @param index The index of the task to be deleted
      * @throws ChinChinException If the list is empty or if the specified index is out of bounds
      */
-    public void deleteTask(int index) throws ChinChinException {
+    public String deleteTask(int index) throws ChinChinException {
         try {
             index -= 1;
             Task currentTask = customList.get(index);
             String taskInfo = currentTask.show();
             customList.remove(index);
             updateList();
-            ChinChinUI.printHeader("Okay Boss, removed liao:");
-            ChinChinUI.printMisc(taskInfo);
-            ChinChinUI.printBottom();
+            return "Okay Boss, removed liao:\n" + taskInfo;
         } catch (IndexOutOfBoundsException e) {
             throw new ChinChinException("er.. check again! The list not that long.");
         }
@@ -307,22 +306,25 @@ public class CustomList {
      * Locate for the tasks containing the keyword
      *
      * @param keyword The keyword to search for
+     * @return
      */
-    public void findKeyword(String keyword) {
+    public String findKeyword(String keyword) {
+        StringBuilder returnString = new StringBuilder();
         boolean isEmpty = true;
         for (int i = 0; i < customList.size(); i++) {
             String taskDescription = customList.get(i).show();
             if (taskDescription.contains(keyword)) {
                 if (isEmpty) {
-                    ChinChinUI.printHeader("Here's some of the matches: ");
+                    returnString = new StringBuilder("Here's some of the matches: ");
                 }
-                ChinChinUI.printMisc(i + 1 + ". " + taskDescription);
+                returnString.append(i + 1).append(". ").append(taskDescription);
                 isEmpty = false;
             }
         }
         if (isEmpty) {
-            ChinChinUI.printHeader("No matches la..");
+            return "No matches la..";
+        } else {
+            return returnString.toString();
         }
-        ChinChinUI.printBottom();
     }
 }

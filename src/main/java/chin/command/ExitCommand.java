@@ -23,8 +23,8 @@ public class ExitCommand extends ChinChinCommand {
      * @throws ChinChinException If there is any errors executing the command
      */
     @Override
-    public void execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        ChinChinUI.goodbye();
+    public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
+        return ChinChinUI.goodbye();
     }
 
     /**
@@ -35,5 +35,15 @@ public class ExitCommand extends ChinChinCommand {
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    /**
+     * Command Type
+     *
+     * @return The commandType
+     */
+    @Override
+    public String getcommandType() {
+        return "exit";
     }
 }

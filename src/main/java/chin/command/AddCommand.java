@@ -30,19 +30,19 @@ public class AddCommand extends ChinChinCommand {
      * @throws ChinChinException If there is any errors executing the command
      */
     @Override
-    public void execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
+    public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
         if (userInput.startsWith("todo") || userInput.startsWith("Todo")) {
             String taskInfo = taskList.todoTask(userInput);
             int taskListSize = taskList.size();
-            chinChinUI.printInfo(taskInfo, taskListSize);
+            return ChinChinUI.printInfo(taskInfo, taskListSize);
         } else if (userInput.startsWith("deadline") || userInput.startsWith("Deadline")) {
             String taskInfo = taskList.deadlineTask(userInput);
             int taskListSize = taskList.size();
-            chinChinUI.printInfo(taskInfo, taskListSize);
+            return ChinChinUI.printInfo(taskInfo, taskListSize);
         } else if (userInput.startsWith("event") || userInput.startsWith("Event")) {
             String taskInfo = taskList.eventTask(userInput);
             int taskListSize = taskList.size();
-            chinChinUI.printInfo(taskInfo, taskListSize);
+            return ChinChinUI.printInfo(taskInfo, taskListSize);
         } else {
             throw new ChinChinException("Huh..");
         }
@@ -57,4 +57,15 @@ public class AddCommand extends ChinChinCommand {
     public boolean isExit() {
         return false;
     }
+
+    /**
+     * Command Type
+     *
+     * @return The commandType
+     */
+    @Override
+    public String getcommandType() {
+        return "add";
+    }
+
 }

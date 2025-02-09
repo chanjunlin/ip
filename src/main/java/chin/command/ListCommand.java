@@ -22,8 +22,8 @@ public class ListCommand extends ChinChinCommand {
      * @throws ChinChinException If there is any errors executing the command
      */
     @Override
-    public void execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        taskList.showList();
+    public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
+        return taskList.showList();
     }
 
     /**
@@ -34,5 +34,15 @@ public class ListCommand extends ChinChinCommand {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Command Type
+     *
+     * @return The commandType
+     */
+    @Override
+    public String getcommandType() {
+        return "list";
     }
 }
