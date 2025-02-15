@@ -11,12 +11,13 @@ import chin.util.CustomList;
 public abstract class ChinChinCommand {
 
     /**
-     * Executes the command
+     * Executes the different commands
      *
-     * @param taskList   The customList holding all the tasks
-     * @param chinChinUI The ChinChinUI that displays all the UI
-     * @param storage    The storage that is responsible for saving tasks
-     * @throws ChinChinException If there is any errors executing the command
+     * @param taskList      The customList holding all the tasks
+     * @param chinChinUI    The ChinChinUI that displays all the UI
+     * @param storage       The storage that is responsible for saving tasks
+     * @return              The reply of the program
+     * @throws ChinChinException    If there is any errors executing the command
      */
     public abstract String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage)
             throws ChinChinException;

@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
  * Controller for the main GUI.
  */
 public class MainWindow extends AnchorPane {
-    private static final String LINE_SEPARATOR = "-------------------------------------";
 
     @FXML
     private ScrollPane scrollPane;
@@ -29,12 +28,10 @@ public class MainWindow extends AnchorPane {
 
     private ChinChin chinChin;
 
-    private Image userImage =
+    private final Image userImage =
         new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/avatar.png")));
-    private Image chinChinImage =
+    private final Image chinChinImage =
         new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/chill.png")));
-
-    private Label greetingLabel;
 
     /**
      * Initialise the program

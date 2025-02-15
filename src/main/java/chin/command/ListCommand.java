@@ -9,9 +9,6 @@ import chin.util.CustomList;
  * Represent the ListCommand that displays all the tasks in the list
  */
 public class ListCommand extends ChinChinCommand {
-    public ListCommand() {
-
-    }
 
     /**
      * Executes the list command

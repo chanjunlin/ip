@@ -6,17 +6,15 @@ import chin.ui.ChinChinUI;
 import chin.util.ChinChinException;
 import chin.util.ChinChinParser;
 import chin.util.CustomList;
-import javafx.application.Platform;
-
 
 /**
  * Main application class for managing tasks
  */
 public class ChinChin {
 
-    private static CustomList customList;
-    private static Storage storage;
-    private static ChinChinUI chinChinUI;
+    private final CustomList customList;
+    private final Storage storage;
+    private final ChinChinUI chinChinUI;
 
     private String commandType;
 
@@ -25,43 +23,14 @@ public class ChinChin {
      *
      * @param filePath The file path to store all the tasks
      */
-    public ChinChin(String filePath) {
-        chinChinUI = new ChinChinUI();
-        storage = new Storage(filePath);
-        customList = storage.initialiseTasks();
-    }
-
-    /**
-     *
-     */
-    public void run() {
-        ChinChinUI.displayGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = chinChinUI.readCommand();
-                ChinChinCommand c = ChinChinParser.parse(fullCommand);
-                c.execute(customList, chinChinUI, storage);
-                isExit = c.isExit();
-                if (isExit) {
-                    Platform.runLater(() -> {
-                        Platform.exit();
-                        System.exit(0);
-                    });
-                }
-            } catch (ChinChinException e) {
-                System.out.println(e.getMessage());
-            }
+    public ChinChin(String filePath) throws ChinChinException {
+        try {
+            chinChinUI = new ChinChinUI();
+            storage = new Storage(filePath);
+            customList = storage.initialiseTasks();
+        } catch (ChinChinException e) {
+            throw new ChinChinException("Got error: " + e.getMessage());
         }
-    }
-
-    /**
-     * Entry point of the program
-     *
-     * @param args Command line arguments passed to the program
-     */
-    public static void main(String[] args) {
-        new ChinChin("data/ChinChinTaskList.txt").run();
     }
 
     /**

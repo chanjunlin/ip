@@ -6,14 +6,11 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * testing
+ * Represents a command to return a confused string when the user keys in an unknown command.
  */
 public class BadCommand extends ChinChinCommand {
 
-    private String userInput;
-
     public BadCommand(String userInput) {
-        this.userInput = userInput;
     }
 
     @Override
