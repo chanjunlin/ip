@@ -9,38 +9,39 @@ import chin.util.CustomList;
  * Represents a command to create a new task to add to the list
  */
 public class AddCommand extends ChinChinCommand {
-    private String userInput;
+    private final String userCommand;
+
 
     /**
      * Constructs a AddCommand object
      *
-     * @param userInput The user's input
-     * @throws ChinChinException If the there is no index provided or if it's not an integer
+     * @param userInput     The user's input
      */
     public AddCommand(String userInput) {
-        this.userInput = userInput;
+        this.userCommand = userInput;
     }
 
     /**
      * Executes the Add command which will create a new task, depending on the input
      *
-     * @param taskList   The customList holding all the tasks
-     * @param chinChinUI The ChinChinUI that displays all the UI
-     * @param storage    The storage that is responsible for saving tasks
+     * @param taskList      The customList holding all the tasks
+     * @param chinChinUI    The ChinChinUI that displays all the UI
+     * @param storage       The storage that is responsible for saving tasks
+     * @return              The reply of the program
      * @throws ChinChinException If there is any errors executing the command
      */
     @Override
     public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        if (userInput.startsWith("todo") || userInput.startsWith("Todo")) {
-            String taskInfo = taskList.todoTask(userInput);
+        if (userCommand.startsWith("todo") || userCommand.startsWith("Todo")) {
+            String taskInfo = taskList.todoTask(userCommand);
             int taskListSize = taskList.size();
             return ChinChinUI.printInfo(taskInfo, taskListSize);
-        } else if (userInput.startsWith("deadline") || userInput.startsWith("Deadline")) {
-            String taskInfo = taskList.deadlineTask(userInput);
+        } else if (userCommand.startsWith("deadline") || userCommand.startsWith("Deadline")) {
+            String taskInfo = taskList.deadlineTask(userCommand);
             int taskListSize = taskList.size();
             return ChinChinUI.printInfo(taskInfo, taskListSize);
-        } else if (userInput.startsWith("event") || userInput.startsWith("Event")) {
-            String taskInfo = taskList.eventTask(userInput);
+        } else if (userCommand.startsWith("event") || userCommand.startsWith("Event")) {
+            String taskInfo = taskList.eventTask(userCommand);
             int taskListSize = taskList.size();
             return ChinChinUI.printInfo(taskInfo, taskListSize);
         } else {

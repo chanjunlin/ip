@@ -3,7 +3,7 @@ package chin.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
+import chin.main.ChinChin;
 import chin.util.ChinChinException;
 import chin.util.DateFormatter;
 
@@ -23,15 +23,10 @@ public class Event extends Task {
      * @param ending    The ending of the event
      * @param userInput The user input to get the description of the task
      */
-    public Event(String task, TaskType taskType, String starting, String ending, String userInput) {
+    public Event(String task, TaskType taskType, String starting, String ending, String userInput)
+        throws ChinChinException {
         super(task, taskType, userInput);
-        try {
-            this.starting = parseDate(starting);
-            this.ending = parseDate(ending);
-
-        } catch (ChinChinException e) {
-            System.out.println(e.getMessage());
-        }
+        dateFormatter(starting, ending);
     }
 
     /**
@@ -43,7 +38,16 @@ public class Event extends Task {
     public String show() {
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         return super.show() + " (FROM: " + this.starting.format(displayFormatter) + " TO: "
-                + this.ending.format(displayFormatter) + ")";
+            + this.ending.format(displayFormatter) + ")";
+    }
+
+    public void dateFormatter(String starting, String ending) throws ChinChinException {
+        try {
+            this.starting = parseDate(starting);
+            this.ending = parseDate(ending);
+        } catch (Exception e) {
+            throw new ChinChinException("error... " + e.getMessage());
+        }
     }
 
     /**

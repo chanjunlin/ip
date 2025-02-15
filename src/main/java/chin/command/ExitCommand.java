@@ -10,9 +10,6 @@ import chin.util.CustomList;
  */
 public class ExitCommand extends ChinChinCommand {
 
-    public ExitCommand() {
-
-    }
 
     /**
      * Executes the exit command

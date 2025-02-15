@@ -10,7 +10,7 @@ import chin.util.CustomList;
  */
 public class FindCommand extends ChinChinCommand {
 
-    private String findString;
+    private final String findString;
 
     public FindCommand(String userInput) throws ChinChinException {
         this.findString = extractKeyword(userInput);

@@ -12,12 +12,6 @@ public class GreetingCommand extends ChinChinCommand {
 
     private static int greetingsCount = 0;
 
-    private String userInput;
-
-    public GreetingCommand(String userInput) {
-        this.userInput = userInput;
-    }
-
     @Override
     public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
         greetingsCount += 1;

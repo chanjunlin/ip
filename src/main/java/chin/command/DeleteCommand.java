@@ -10,7 +10,7 @@ import chin.util.CustomList;
  */
 public class DeleteCommand extends ChinChinCommand {
 
-    private int deleteIndex;
+    private final int deleteIndex;
 
     /**
      * Constructs a DeleteCommand object
