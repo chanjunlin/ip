@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import chin.task.Deadline;
 import chin.task.Event;
@@ -18,10 +19,10 @@ import chin.util.CustomList;
  * Represents a storage class that handles all the miscellaneous tasks
  */
 public class Storage {
-    private final String filePath;
+    private final String actualFilePath;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.actualFilePath = filePath;
     }
 
     /**
@@ -31,32 +32,31 @@ public class Storage {
      *
      * @return A CustomList containing tasks loaded from the the textfile or an empty CustomList if no file exists.
      */
-    public CustomList initialiseTasks() {
-        File file = new File(filePath);
+    public CustomList initialiseTasks() throws ChinChinException {
+        File file = new File(actualFilePath);
         if (file.exists()) {
             return loadTasks();
         } else {
             createNewFile();
-            return new CustomList(filePath);
+            return new CustomList(actualFilePath);
         }
     }
 
     /**
      * Create a new file for storing tasks.
      */
-    public void createNewFile() {
+    public void createNewFile() throws ChinChinException {
         try {
-            File newFile = new File(filePath);
-
+            File newFile = new File(actualFilePath);
             File parentDir = newFile.getParentFile();
-
-            if (parentDir != null && !parentDir.exists()) {
+            boolean isParentExists = parentDir.exists();
+            if (!isParentExists) {
                 parentDir.mkdirs();
             }
 
             newFile.createNewFile();
         } catch (IOException e) {
-            System.out.println("Paisei, got something wrong. Your todo list might not be saved.");
+            throw new ChinChinException("Paisei, got something wrong. Your todo list might not be saved.");
         }
     }
 
@@ -65,19 +65,19 @@ public class Storage {
      *
      * @return A CustomList containing all tasks read from the text file
      */
-    public CustomList loadTasks() {
-        CustomList taskList = new CustomList(filePath);
+    public CustomList loadTasks() throws ChinChinException {
+        CustomList taskList = new CustomList(actualFilePath);
         taskList.setStorage(this);
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(actualFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Task task = checkTask(line);
                 taskList.addToList(task);
             }
         } catch (IOException e) {
-            System.out.println("Paisei got error: " + e.getMessage());
+            throw new ChinChinException("Paisei got error: " + e.getMessage());
         } catch (ChinChinException e) {
-            System.out.println(e.getMessage() + " I don't know why got error");
+            throw new ChinChinException(e.getMessage() + " I don't know why got error");
         }
         return taskList;
     }
@@ -87,14 +87,14 @@ public class Storage {
      *
      * @param taskList The ArrayList of Task objects to save to the text file
      */
-    public void updateList(ArrayList<Task> taskList) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+    public void updateList(List<Task> taskList) throws ChinChinException{
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(actualFilePath))) {
             for (Task task : taskList) {
                 writer.write(taskToString(task));
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Paisei got error: " + e.getMessage());
+            throw new ChinChinException("Paisei got error: " + e.getMessage());
         }
     }
 
@@ -105,8 +105,7 @@ public class Storage {
      * @return The string representation of this Task for storing
      */
     public String taskToString(Task task) {
-        String lineToWrite = task.isDone() + " " + task.getUserInput();
-        return lineToWrite;
+        return task.isDone() + " " + task.getUserInput();
     }
 
     /**

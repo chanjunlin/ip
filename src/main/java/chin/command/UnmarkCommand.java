@@ -10,10 +10,10 @@ import chin.util.CustomList;
  */
 public class UnmarkCommand extends ChinChinCommand {
 
-    private int unmarkIndex;
+    private final int indexToUnmark;
 
     public UnmarkCommand(String userInput) throws ChinChinException {
-        this.unmarkIndex = extractIndex(userInput);
+        this.indexToUnmark = extractIndex(userInput);
     }
 
     /**
@@ -26,7 +26,7 @@ public class UnmarkCommand extends ChinChinCommand {
      */
     @Override
     public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        return taskList.unmarkTask(this.unmarkIndex);
+        return taskList.unmarkTask(this.indexToUnmark);
     }
 
     /**

@@ -13,19 +13,15 @@ import chin.task.TaskType;
  */
 public class CustomList {
 
-    private static ArrayList<Task> customList;
-    private static final String STRINGINFO = "Oki, I add this task for you:\n ";
+    private final ArrayList<Task> customTaskList;
+    private static final String STRING_INFO = "Oki, I add this task for you:\n ";
     private Storage storage;
-    private String filePath;
 
     /**
      * Create a new custom list with the file path to write to
-     *
-     * @param filePath The file path to write to
      */
-    public CustomList(String filePath) {
-        customList = new ArrayList<Task>();
-        this.filePath = filePath;
+    public CustomList(String userInput) {
+        customTaskList = new ArrayList<>();
     }
 
     /**
@@ -34,7 +30,7 @@ public class CustomList {
      * @param task The task to be added
      */
     public void addToList(Task task) {
-        customList.add(task);
+        customTaskList.add(task);
     }
 
     /**
@@ -43,7 +39,7 @@ public class CustomList {
      * @return The number of tasks in the list
      */
     public int size() {
-        return customList.size();
+        return customTaskList.size();
     }
 
     /**
@@ -58,16 +54,16 @@ public class CustomList {
     /**
      * Display all tasks in the list with their index number
      *
-     * @return
+     * @return The string containing all the tasks in the list
      */
     public String showList() {
         StringBuilder returnString = new StringBuilder();
-        if (customList.isEmpty()) { // if ArrayList is empty, let the user know
+        if (customTaskList.isEmpty()) { // if ArrayList is empty, let the user know
             returnString.append("List empty la");
         } else { // else show everything in the list
             returnString.append("Here are the tasks in your list: ").append("\n");
-            for (int i = 0; i < customList.size(); i++) {
-                returnString.append((i + 1)).append(". ").append(customList.get(i).show()).append("\n");
+            for (int i = 0; i < customTaskList.size(); i++) {
+                returnString.append((i + 1)).append(". ").append(customTaskList.get(i).show()).append("\n");
             }
         }
         return returnString.toString();
@@ -84,7 +80,7 @@ public class CustomList {
         try {
             returnString = new StringBuilder();
             index -= 1;
-            Task currentTask = customList.get(index);
+            Task currentTask = customTaskList.get(index);
             boolean isMarked = currentTask.isDone();
             if (!isMarked) {
                 currentTask.mark();
@@ -111,7 +107,7 @@ public class CustomList {
         try {
             returnString = new StringBuilder();
             index -= 1;
-            Task currentTask = customList.get(index);
+            Task currentTask = customTaskList.get(index);
             boolean isMarked = currentTask.isDone();
             if (isMarked) {
                 currentTask.unmark();
@@ -135,7 +131,7 @@ public class CustomList {
      * @throws ChinChinException If the task description is empty
      */
     public String todoTask(String userInput) throws ChinChinException {
-        String taskInfo = STRINGINFO;
+        String taskInfo = STRING_INFO;
         Task todoTask = createTodoTask(userInput);
         taskInfo += todoTask.show();
         addToList(todoTask);
@@ -153,7 +149,7 @@ public class CustomList {
     public static Task createTodoTask(String userInput) throws ChinChinException {
         int todoDescIndex = userInput.indexOf("todo");
         if ("todo ".length() > userInput.length()) {
-            throw new ChinChinException("your \'todo\' task got no description le");
+            throw new ChinChinException("your 'todo' task got no description le");
         }
         String todoDesc = userInput.substring(todoDescIndex + "todo ".length()).trim();
         return new Task(todoDesc, TaskType.TODO, userInput);
@@ -168,7 +164,7 @@ public class CustomList {
      * @throws ChinChinException If the task description is empty or the deadline is missing
      */
     public String deadlineTask(String userInput) throws ChinChinException {
-        String taskInfo = STRINGINFO;
+        String taskInfo = STRING_INFO;
         Deadline deadlineTask = createDeadlineTask(userInput);
         taskInfo += deadlineTask.show();
         addToList(deadlineTask);
@@ -213,7 +209,7 @@ public class CustomList {
      *                           or the ending time is missing
      */
     public String eventTask(String userInput) throws ChinChinException {
-        String taskInfo = STRINGINFO;
+        String taskInfo = STRING_INFO;
         Event eventTask = createEventTask(userInput);
         taskInfo += eventTask.show();
         addToList(eventTask);
@@ -273,9 +269,9 @@ public class CustomList {
     public String deleteTask(int index) throws ChinChinException {
         try {
             index -= 1;
-            Task currentTask = customList.get(index);
+            Task currentTask = customTaskList.get(index);
             String taskInfo = currentTask.show();
-            customList.remove(index);
+            customTaskList.remove(index);
             updateList();
             return "Okay Boss, removed liao:\n" + taskInfo;
         } catch (IndexOutOfBoundsException e) {
@@ -286,8 +282,8 @@ public class CustomList {
     /**
      * Updates the list when there is any changes done to the list
      */
-    public void updateList() {
-        this.storage.updateList(customList);
+    public void updateList() throws ChinChinException {
+        this.storage.updateList(customTaskList);
     }
 
     /**
@@ -297,7 +293,7 @@ public class CustomList {
      * @return The tasks at the specific index
      */
     public Task getTask(int index) {
-        Task retrievedTask = customList.get(index);
+        Task retrievedTask = customTaskList.get(index);
         System.out.println(retrievedTask.show());
         return retrievedTask;
     }
@@ -311,8 +307,8 @@ public class CustomList {
     public String findKeyword(String keyword) {
         StringBuilder returnString = new StringBuilder();
         boolean isEmpty = true;
-        for (int i = 0; i < customList.size(); i++) {
-            String taskDescription = customList.get(i).show();
+        for (int i = 0; i < customTaskList.size(); i++) {
+            String taskDescription = customTaskList.get(i).show();
             if (taskDescription.contains(keyword)) {
                 if (isEmpty) {
                     returnString = new StringBuilder("Here's some of the matches: ");

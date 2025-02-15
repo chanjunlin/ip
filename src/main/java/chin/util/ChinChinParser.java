@@ -30,35 +30,16 @@ public class ChinChinParser {
         String command = parts[0];
         command = command.toLowerCase();
 
-        switch (command) {
-        case ("bye"):
-            // Fallthrough
-        case ("exit"):
-            return new ExitCommand();
-        case ("hi"):
-            // Fallthrough
-        case ("hello"):
-            // Fallthrough
-        case ("greetings"):
-            return new GreetingCommand(userInput);
-        case ("delete"):
-            return new DeleteCommand(userInput);
-        case ("find"):
-            return new FindCommand(userInput);
-        case ("list"):
-            return new ListCommand();
-        case ("mark"):
-            return new MarkCommand(userInput);
-        case ("unmark"):
-            return new UnmarkCommand(userInput);
-        case ("todo"):
-            // Fallthrough
-        case ("deadline"):
-            // Fallthrough
-        case ("event"):
-            return new AddCommand(userInput);
-        default:
-            return new BadCommand(userInput);
-        }
+        return switch (command) {
+        case ("bye"), ("exit") -> new ExitCommand();
+        case ("hi"), ("hello"), ("greetings") -> new GreetingCommand();
+        case ("delete") -> new DeleteCommand(userInput);
+        case ("find") -> new FindCommand(userInput);
+        case ("list") -> new ListCommand();
+        case ("mark") -> new MarkCommand(userInput);
+        case ("unmark") -> new UnmarkCommand(userInput);
+        case ("todo"), ("deadline"), ("event") -> new AddCommand(userInput);
+        default -> new BadCommand(userInput);
+        };
     }
 }

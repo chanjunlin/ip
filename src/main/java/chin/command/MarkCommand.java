@@ -10,10 +10,10 @@ import chin.util.CustomList;
  */
 public class MarkCommand extends ChinChinCommand {
 
-    private final int markIndex;
+    private final int indexToMark;
 
     public MarkCommand(String userInput) throws ChinChinException {
-        this.markIndex = extractIndex(userInput);
+        this.indexToMark = extractIndex(userInput);
     }
 
     /**
@@ -26,7 +26,7 @@ public class MarkCommand extends ChinChinCommand {
      */
     @Override
     public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        return taskList.markTask(this.markIndex);
+        return taskList.markTask(this.indexToMark);
     }
 
     /**
