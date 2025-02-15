@@ -148,9 +148,7 @@ public class CustomList {
      */
     public static Task createTodoTask(String userInput) throws ChinChinException {
         int todoDescIndex = userInput.indexOf("todo");
-        if ("todo ".length() > userInput.length()) {
-            throw new ChinChinException("your 'todo' task got no description le");
-        }
+        assert "todo ".length() < userInput.length() : "your 'todo' task got no description le";
         String todoDesc = userInput.substring(todoDescIndex + "todo ".length()).trim();
         return new Task(todoDesc, TaskType.TODO, userInput);
     }
@@ -180,6 +178,8 @@ public class CustomList {
      */
     public static Deadline createDeadlineTask(String userInput) throws ChinChinException {
         int deadlineDescIndex = userInput.indexOf("deadline ") + "deadline ".length();
+        assert "deadline ".length() > userInput.length() : "why is your task description empty?";
+        assert userInput.contains("/by") : "you never put deadline then why use the deadline feature...";
         if ("deadline ".length() > userInput.length()) {
             throw new ChinChinException("why is your task description empty?");
         } else if (!userInput.contains("/by")) {
