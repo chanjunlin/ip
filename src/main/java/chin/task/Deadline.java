@@ -34,7 +34,7 @@ public class Deadline extends Task {
     @Override
     public String show() {
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
-        return super.show() + " (BY: " + this.dueDate.format(displayFormatter) + ")";
+        return super.show() + "\nDEADLINE: " + this.dueDate.format(displayFormatter);
     }
 
 

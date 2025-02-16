@@ -69,7 +69,7 @@ public class Task {
      * @return A formatted string showing whether it's completed and its details
      */
     public String show() {
-        String header = (isDone ? "[X]" : "[ ]");
+        String header = (isDone ? "[\u2714\ufe0f]" : "[ ]");
         return this.taskTag.getTag() + header + " " + this.taskName;
     }
 
