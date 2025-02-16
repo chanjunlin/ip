@@ -3,7 +3,7 @@ package chin.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import chin.main.ChinChin;
+
 import chin.util.ChinChinException;
 import chin.util.DateFormatter;
 
@@ -24,7 +24,7 @@ public class Event extends Task {
      * @param userInput The user input to get the description of the task
      */
     public Event(String task, TaskType taskType, String starting, String ending, String userInput)
-        throws ChinChinException {
+            throws ChinChinException {
         super(task, taskType, userInput);
         dateFormatter(starting, ending);
     }
@@ -41,6 +41,12 @@ public class Event extends Task {
             + this.ending.format(displayFormatter) + ")";
     }
 
+    /**
+     *  test
+     * @param starting test
+     * @param ending test
+     * @throws ChinChinException test
+     */
     public void dateFormatter(String starting, String ending) throws ChinChinException {
         try {
             this.starting = parseDate(starting);

@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import chin.task.Deadline;
@@ -87,7 +86,7 @@ public class Storage {
      *
      * @param taskList The ArrayList of Task objects to save to the text file
      */
-    public void updateList(List<Task> taskList) throws ChinChinException{
+    public void updateList(List<Task> taskList) throws ChinChinException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(actualFilePath))) {
             for (Task task : taskList) {
                 writer.write(taskToString(task));

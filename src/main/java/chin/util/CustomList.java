@@ -12,9 +12,9 @@ import chin.task.TaskType;
  * Custom list class to manage the collection of tasks
  */
 public class CustomList {
+    private static final String STRING_INFO = "Oki, task added liao ✅:\n";
 
     private final ArrayList<Task> customTaskList;
-    private static final String STRING_INFO = "Oki, I add this task for you:\n ";
     private Storage storage;
 
     /**
@@ -59,14 +59,100 @@ public class CustomList {
     public String showList() {
         StringBuilder returnString = new StringBuilder();
         if (customTaskList.isEmpty()) { // if ArrayList is empty, let the user know
-            returnString.append("List empty la");
+            return "List empty la";
         } else { // else show everything in the list
             returnString.append("Here are the tasks in your list: ").append("\n");
-            for (int i = 0; i < customTaskList.size(); i++) {
-                returnString.append((i + 1)).append(". ").append(customTaskList.get(i).show()).append("\n");
+            return returnString + getTodoList() + getDeadlineList() + getEventList();
+        }
+    }
+
+    /**
+     * Retrieve the tasks of certain tag
+     *
+     * @param taskTag The tag required
+     * @return The list of tasks that corresponds to the certain tag
+     */
+    public ArrayList<Task> filterTaskByTag(String taskTag) {
+        ArrayList<Task> filteredTasks = new ArrayList<Task>();
+        for (Task task : this.customTaskList) {
+            if (!task.getTag().equals(taskTag)) {
+                continue;
+            } else {
+                filteredTasks.add(task);
             }
         }
-        return returnString.toString();
+        return filteredTasks;
+    }
+
+    public String getTodoList() {
+        ArrayList<Task> todoList = filterTaskByTag("[T]");
+        StringBuilder todoString = new StringBuilder();
+        int maxWidth = String.valueOf(todoList.size()).length();
+        int todoIndex = 1;
+
+        for (Task task : todoList) {
+            int paddedIndex = getPadding(maxWidth, String.valueOf(todoIndex).length());
+            todoString.append(todoIndex).append(".").append(" ".repeat(paddedIndex + 1)).append(task.show())
+                .append("\n");
+            todoIndex++;
+        }
+        return "Todo \uD83D\uDCDD\n" + todoString + "\n";
+    }
+
+    public String getDeadlineList() {
+        ArrayList<Task> deadlineList = filterTaskByTag("[D]");
+        StringBuilder deadlineString = new StringBuilder();
+        int maxWidth = String.valueOf(deadlineList.size()).length();
+        int deadlineIndex = 1;
+
+        for (Task task : deadlineList) {
+            int paddedIndex = getPadding(maxWidth, String.valueOf(deadlineIndex).length());
+            deadlineString.append(deadlineIndex).append(".").append(" ".repeat(paddedIndex + 1)).append(task.show())
+                .append("\n");
+            deadlineIndex++;
+        }
+        return "Deadline \uu23f0:\n" + deadlineString + "\n";
+    }
+
+    public String getEventList() {
+        ArrayList<Task> eventList = filterTaskByTag("[E]");
+        StringBuilder eventString = new StringBuilder();
+        int maxWidth = String.valueOf(eventList.size()).length();
+        int eventIndex = 1;
+        for (Task task : eventList) {
+            int paddedIndex = getPadding(maxWidth, String.valueOf(eventIndex).length());
+            eventString.append(eventString).append(".").append(" ".repeat(paddedIndex + 1)).append(task.show())
+                .append("\n");
+            eventIndex++;
+        }
+        return "Event \uD83D\uDCC5:\n" + eventString;
+    }
+
+    /**
+     * Return the padding needed
+     *
+     * @param maxWidth   The max
+     * @param indexWidth
+     * @return
+     */
+    public int getPadding(int maxWidth, int indexWidth) {
+        return maxWidth - indexWidth;
+    }
+
+    /**
+     * @return
+     */
+    public String getSummary() {
+        int totalTodos = filterTaskByTag("[T]").size();
+        int totalDeadlines = filterTaskByTag("[D]").size();
+        int totalEvents = filterTaskByTag("[E]").size();
+
+        return """
+            Here’s your summary:
+            📝 Todos      : %d
+            ⏰ Deadlines  : %d
+            📅 Events     : %d
+            """.formatted(totalTodos, totalDeadlines, totalEvents);
     }
 
     /**
@@ -293,9 +379,7 @@ public class CustomList {
      * @return The tasks at the specific index
      */
     public Task getTask(int index) {
-        Task retrievedTask = customTaskList.get(index);
-        System.out.println(retrievedTask.show());
-        return retrievedTask;
+        return customTaskList.get(index);
     }
 
     /**
@@ -323,4 +407,6 @@ public class CustomList {
             return returnString.toString();
         }
     }
+
 }
+

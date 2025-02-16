@@ -30,7 +30,7 @@ test {
 }
 
 application {
-    mainClass = 'ChinChin.main.ChinChin'
+    mainClass = 'chin.ui.Main'
 }
 
 shadowJar {

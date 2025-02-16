@@ -10,6 +10,7 @@ import chin.command.FindCommand;
 import chin.command.GreetingCommand;
 import chin.command.ListCommand;
 import chin.command.MarkCommand;
+import chin.command.SummaryCommand;
 import chin.command.UnmarkCommand;
 
 /**
@@ -39,6 +40,7 @@ public class ChinChinParser {
         case ("mark") -> new MarkCommand(userInput);
         case ("unmark") -> new UnmarkCommand(userInput);
         case ("todo"), ("deadline"), ("event") -> new AddCommand(userInput);
+        case ("summary") -> new SummaryCommand();
         default -> new BadCommand(userInput);
         };
     }
