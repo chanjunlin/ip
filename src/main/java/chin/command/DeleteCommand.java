@@ -78,4 +78,11 @@ public class DeleteCommand extends ChinChinCommand {
     public String getcommandType() {
         return "delete";
     }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            delete help command
+            """;
+    }
 }

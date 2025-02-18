@@ -27,4 +27,9 @@ public class BadCommand extends ChinChinCommand {
     public String getcommandType() {
         return "chinChinException";
     }
+
+    @Override
+    public String displayHelpInfo() {
+        return null;
+    }
 }

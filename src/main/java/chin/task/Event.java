@@ -32,7 +32,7 @@ public class Event extends Task {
     /**
      * Display string representation of this event's details
      *
-     * @return A reformatted string showing wether it's completed and its details including starting and ending
+     * @return A reformatted string showing whether it's completed and its details including starting and ending
      */
     @Override
     public String show() {
@@ -42,10 +42,13 @@ public class Event extends Task {
     }
 
     /**
-     *  test
-     * @param starting test
-     * @param ending test
-     * @throws ChinChinException test
+     * Parses and formats the starting and ending date strings into a standardized date format.
+     *
+     * @param starting The string representing the starting date that needs to be parsed.
+     * @param ending   The string representing the ending date that needs to be parsed.
+     *
+     * @throws ChinChinException If either of the provided date strings cannot be parsed
+     *                            into the required format.
      */
     public void dateFormatter(String starting, String ending) throws ChinChinException {
         try {
@@ -60,7 +63,9 @@ public class Event extends Task {
      * Parses a date string into a LocalDateTime object based on supported date formats in DateFormatter
      *
      * @param dateString The input string to be parsed
+     *
      * @return A LocalDateTime object representing the parsed date and time.
+     *
      * @throws ChinChinException If no matching format is found, indicating an unsupported or invalid format.
      */
     public LocalDateTime parseDate(String dateString) throws ChinChinException {

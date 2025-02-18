@@ -64,6 +64,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Display the greeting message to the user when the application first starts.
+     */
     private void displayGreeting() {
         String greetingMessage = "Nihao, I'm ChinChin\nWhat you want?";
         DialogBox greetingDialog = DialogBox.getChinDialog(greetingMessage, chinChinImage, "null");

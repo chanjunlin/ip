@@ -74,4 +74,11 @@ public class MarkCommand extends ChinChinCommand {
     public String getcommandType() {
         return "mark";
     }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            help mark command
+            """;
+    }
 }

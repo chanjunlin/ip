@@ -43,4 +43,11 @@ public class ExitCommand extends ChinChinCommand {
     public String getcommandType() {
         return "exit";
     }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            exit help command
+            """;
+    }
 }
