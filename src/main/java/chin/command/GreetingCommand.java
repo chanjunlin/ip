@@ -30,4 +30,11 @@ public class GreetingCommand extends ChinChinCommand {
     public String getcommandType() {
         return "greetings";
     }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            help greeting command
+            """;
+    }
 }

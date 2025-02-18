@@ -11,16 +11,26 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Test
+ * The main entry point for the ChinChin application.
  */
 public class Main extends Application {
 
     private final ChinChin chinChin;
 
+    /**
+     * Constructs a Main instance and initialises the ChinChin task manager.
+     *
+     * @throws ChinChinException If there is an error initializing the task manager with the specified data file.
+     */
     public Main() throws ChinChinException {
         this.chinChin = new ChinChin("data/ChinChinTaskList.txt");
     }
 
+    /**
+     * Starts the JavaFX application by loading the main window.
+     *
+     * @param stage The primary stage for this application.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -30,6 +40,14 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Loads and displays the main application window.
+     *
+     * @param stage The primary stage on which to display the loaded scene.
+     *
+     * @throws IOException If there is an error loading the FXML file for
+     *                     the main window layout.
+     */
     private void loadMainWindow(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
         AnchorPane ap = fxmlLoader.load();
@@ -39,6 +57,11 @@ public class Main extends Application {
         stage.show();
     }
 
+    /**
+     * Displays an error dialog with a specified message.
+     *
+     * @param message The message to be displayed in the alert dialog box.
+     */
     private void showErrorDialog(String message) {
         javafx.scene.control.Alert alertMessage =
             new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);

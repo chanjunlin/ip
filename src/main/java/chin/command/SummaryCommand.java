@@ -6,13 +6,12 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * Represents the ExitCommand to end the program
+ * test
  */
-public class ExitCommand extends ChinChinCommand {
-
+public class SummaryCommand extends ChinChinCommand {
 
     /**
-     * Executes the exit command
+     * Executes the delete command
      *
      * @param taskList   The customList holding all the tasks
      * @param chinChinUI The ChinChinUI that displays all the UI
@@ -21,17 +20,17 @@ public class ExitCommand extends ChinChinCommand {
      */
     @Override
     public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
-        return ChinChinUI.goodbye();
+        return taskList.getSummary();
     }
 
     /**
      * Indicates if this command will make the program close
      *
-     * @return True
+     * @return false as it's not the Exit command
      */
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 
     /**
@@ -41,13 +40,13 @@ public class ExitCommand extends ChinChinCommand {
      */
     @Override
     public String getcommandType() {
-        return "exit";
+        return "summary";
     }
 
     @Override
     public String displayHelpInfo() {
         return """
-            exit help command
+            help summary command
             """;
     }
 }

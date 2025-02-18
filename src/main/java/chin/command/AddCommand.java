@@ -15,7 +15,7 @@ public class AddCommand extends ChinChinCommand {
     /**
      * Constructs a AddCommand object
      *
-     * @param userInput     The user's input
+     * @param userInput The user's input
      */
     public AddCommand(String userInput) {
         this.userCommand = userInput;
@@ -24,10 +24,10 @@ public class AddCommand extends ChinChinCommand {
     /**
      * Executes the Add command which will create a new task, depending on the input
      *
-     * @param taskList      The customList holding all the tasks
-     * @param chinChinUI    The ChinChinUI that displays all the UI
-     * @param storage       The storage that is responsible for saving tasks
-     * @return              The reply of the program
+     * @param taskList   The customList holding all the tasks
+     * @param chinChinUI The ChinChinUI that displays all the UI
+     * @param storage    The storage that is responsible for saving tasks
+     * @return The reply of the program
      * @throws ChinChinException If there is any errors executing the command
      */
     @Override
@@ -67,6 +67,13 @@ public class AddCommand extends ChinChinCommand {
     @Override
     public String getcommandType() {
         return "add";
+    }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            add command help
+            """;
     }
 
 }

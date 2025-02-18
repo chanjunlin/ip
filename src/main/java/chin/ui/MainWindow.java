@@ -5,7 +5,6 @@ import java.util.Objects;
 import chin.main.ChinChin;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -65,6 +64,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Display the greeting message to the user when the application first starts.
+     */
     private void displayGreeting() {
         String greetingMessage = "Nihao, I'm ChinChin\nWhat you want?";
         DialogBox greetingDialog = DialogBox.getChinDialog(greetingMessage, chinChinImage, "null");

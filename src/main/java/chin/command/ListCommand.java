@@ -42,4 +42,11 @@ public class ListCommand extends ChinChinCommand {
     public String getcommandType() {
         return "list";
     }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            help list command
+            """;
+    }
 }

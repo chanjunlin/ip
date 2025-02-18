@@ -8,8 +8,10 @@ import chin.command.DeleteCommand;
 import chin.command.ExitCommand;
 import chin.command.FindCommand;
 import chin.command.GreetingCommand;
+import chin.command.HelpCommand;
 import chin.command.ListCommand;
 import chin.command.MarkCommand;
+import chin.command.SummaryCommand;
 import chin.command.UnmarkCommand;
 
 /**
@@ -35,10 +37,12 @@ public class ChinChinParser {
         case ("hi"), ("hello"), ("greetings") -> new GreetingCommand();
         case ("delete") -> new DeleteCommand(userInput);
         case ("find") -> new FindCommand(userInput);
+        case ("help") -> new HelpCommand(userInput);
         case ("list") -> new ListCommand();
         case ("mark") -> new MarkCommand(userInput);
         case ("unmark") -> new UnmarkCommand(userInput);
         case ("todo"), ("deadline"), ("event") -> new AddCommand(userInput);
+        case ("summary") -> new SummaryCommand();
         default -> new BadCommand(userInput);
         };
     }
