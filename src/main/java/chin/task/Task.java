@@ -5,7 +5,7 @@ package chin.task;
  */
 public class Task {
     protected boolean isDone = false;
-    protected String taskName;
+    protected String taskDescription;
     protected TaskType taskTag;
     protected String userInput;
 
@@ -17,7 +17,7 @@ public class Task {
      * @param userInput The user input to get the description of this task
      */
     public Task(String task, TaskType taskTag, String userInput) {
-        this.taskName = task;
+        this.taskDescription = task;
         this.taskTag = taskTag;
         this.userInput = userInput;
     }
@@ -69,11 +69,16 @@ public class Task {
      * @return A formatted string showing whether it's completed and its details
      */
     public String show() {
-        String header = (isDone ? "[\u2714\ufe0f]" : "[ ]");
-        return this.taskTag.getTag() + header + " " + this.taskName;
+        String header = (isDone ? "[\u2714\uFE0F]" : "[   ]");
+        return this.taskTag.getTag() + header + " " + this.taskDescription;
     }
 
+    /**
+     * Retrieves the task's description
+     *
+     * @return A string returning the task's description
+     */
     public String getTaskDescription() {
-        return this.taskName;
+        return this.taskDescription;
     }
 }

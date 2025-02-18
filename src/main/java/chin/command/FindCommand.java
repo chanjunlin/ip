@@ -53,4 +53,11 @@ public class FindCommand extends ChinChinCommand {
     public String getcommandType() {
         return "find";
     }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            find help command
+            """;
+    }
 }

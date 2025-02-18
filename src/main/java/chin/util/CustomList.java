@@ -58,9 +58,10 @@ public class CustomList {
      */
     public String showList() {
         StringBuilder returnString = new StringBuilder();
-        if (customTaskList.isEmpty()) { // if ArrayList is empty, let the user know
+
+        if (customTaskList.isEmpty()) {
             return "List empty la";
-        } else { // else show everything in the list
+        } else {
             returnString.append("Here are the tasks in your list: ").append("\n");
             return returnString + getTodoList() + getDeadlineList() + getEventList();
         }
@@ -73,7 +74,7 @@ public class CustomList {
      * @return The list of tasks that corresponds to the certain tag
      */
     public ArrayList<Task> filterTaskByTag(String taskTag) {
-        ArrayList<Task> filteredTasks = new ArrayList<Task>();
+        ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : this.customTaskList) {
             if (!task.getTag().equals(taskTag)) {
                 continue;
@@ -84,9 +85,16 @@ public class CustomList {
         return filteredTasks;
     }
 
+    /**
+     * Retrieves a formatted list of tasks labeled as "Todo".
+     *
+     * @return A string representing a formatted list of Todo tasks,
+     *      or an empty-list scenario message if no Todo tasks exist.
+     */
     public String getTodoList() {
         ArrayList<Task> todoList = filterTaskByTag("[T]");
         StringBuilder todoString = new StringBuilder();
+
         int maxWidth = String.valueOf(todoList.size()).length();
         int todoIndex = 1;
 
@@ -96,9 +104,20 @@ public class CustomList {
                 .append("\n");
             todoIndex++;
         }
+
+        if (todoString.isEmpty()) {
+            todoString.append(emptyListScenario("task"));
+        }
+
         return "Todo \uD83D\uDCDD\n" + todoString + "\n";
     }
 
+    /**
+     * Retrieves a formatted list of tasks labeled as "Deadline".
+     *
+     * @return A string representing a formatted list of Deadline tasks,
+     *      or an empty-list scenario message if no Deadline tasks exist.
+     */
     public String getDeadlineList() {
         ArrayList<Task> deadlineList = filterTaskByTag("[D]");
         StringBuilder deadlineString = new StringBuilder();
@@ -111,36 +130,66 @@ public class CustomList {
                 .append("\n");
             deadlineIndex++;
         }
+
+        if (deadlineString.isEmpty()) {
+            deadlineString.append(emptyListScenario("deadline"));
+        }
+
         return "Deadline \uu23f0:\n" + deadlineString + "\n";
     }
 
+    /**
+     * Retrieves a formatted list of tasks labeled as "Event".
+     *
+     * @return A string representing a formatted list of Event tasks,
+     *      or an empty-list scenario message if no Event tasks exist.
+     */
     public String getEventList() {
         ArrayList<Task> eventList = filterTaskByTag("[E]");
         StringBuilder eventString = new StringBuilder();
         int maxWidth = String.valueOf(eventList.size()).length();
         int eventIndex = 1;
+
         for (Task task : eventList) {
             int paddedIndex = getPadding(maxWidth, String.valueOf(eventIndex).length());
             eventString.append(eventString).append(".").append(" ".repeat(paddedIndex + 1)).append(task.show())
                 .append("\n");
             eventIndex++;
         }
+
+        if (eventString.isEmpty()) {
+            eventString.append(emptyListScenario("event"));
+        }
+
         return "Event \uD83D\uDCC5:\n" + eventString;
     }
 
     /**
-     * Return the padding needed
+     * Calculates the padding needed to align indices in a formatted list.
      *
-     * @param maxWidth   The max
-     * @param indexWidth
-     * @return
+     * @param maxWidth   The maximum width (number of digits) across all indices.
+     * @param indexWidth The width (number of digits) of the current index.
+     * @return An integer representing the number of spaces needed for padding.
      */
     public int getPadding(int maxWidth, int indexWidth) {
         return maxWidth - indexWidth;
     }
 
     /**
-     * @return
+     * Returns a message indicating that there are no tasks of a specific type.
+     *
+     * @param type A string representing the type of task.
+     * @return A string containing an empty-list message for the specified task type.
+     */
+    public String emptyListScenario(String type) {
+        return String.format("No upcoming %s le", type);
+    }
+
+    /**
+     * Generates a summary report of all tasks categorized by type.
+     *
+     * @return A string containing a human-readable summary report,
+     *      including counts for each task category.
      */
     public String getSummary() {
         int totalTodos = filterTaskByTag("[T]").size();
@@ -168,6 +217,7 @@ public class CustomList {
             index -= 1;
             Task currentTask = customTaskList.get(index);
             boolean isMarked = currentTask.isDone();
+
             if (!isMarked) {
                 currentTask.mark();
                 updateList();
@@ -195,6 +245,7 @@ public class CustomList {
             index -= 1;
             Task currentTask = customTaskList.get(index);
             boolean isMarked = currentTask.isDone();
+
             if (isMarked) {
                 currentTask.unmark();
                 updateList();
@@ -233,19 +284,23 @@ public class CustomList {
      * @throws ChinChinException If the task description is empty
      */
     public static Task createTodoTask(String userInput) throws ChinChinException {
-        int todoDescIndex = userInput.indexOf("todo");
-        assert "todo ".length() < userInput.length() : "your 'todo' task got no description le";
-        String todoDesc = userInput.substring(todoDescIndex + "todo ".length()).trim();
+        String todoString = "todo ";
+        int todoDescIndex = userInput.indexOf(todoString);
+        String todoDesc = userInput.substring(todoDescIndex + (todoString.length())).trim();
+        if ((todoString.length()) > userInput.length()) {
+            throw new ChinChinException("your task description is empty bro..");
+        }
         return new Task(todoDesc, TaskType.TODO, userInput);
     }
 
-
     /**
-     * Calls createDeadlineTask to create a new DEADLINE task
+     * Processes user input to create a new DEADLINE task.
      *
-     * @param userInput The user's input
-     * @return The task description
-     * @throws ChinChinException If the task description is empty or the deadline is missing
+     * @param userInput The user's input string containing the task description and deadline.
+     * @return A String representing the description of the newly created task.
+     * @throws ChinChinException If the user input is missing either:
+     *                           - A valid task description
+     *                           - A valid deadline (indicated by "/by").
      */
     public String deadlineTask(String userInput) throws ChinChinException {
         String taskInfo = STRING_INFO;
@@ -257,21 +312,17 @@ public class CustomList {
     }
 
     /**
-     * Create a new DEADLINE task
+     * Creates a new DEADLINE task based on user input.
      *
-     * @param userInput The user's input
-     * @throws ChinChinException If the task description is empty or the deadline is missing
+     * @param userInput The user's input string containing "deadline", followed by a description,
+     *                  and ending with "/by due date".
+     * @return A Deadline object representing the parsed DEADLINE task.
+     * @throws ChinChinException If any of these conditions occur:
+     *                           The user did not use "/by".
+     *                           The user provided an empty task description.
      */
     public static Deadline createDeadlineTask(String userInput) throws ChinChinException {
-        int deadlineDescIndex = userInput.indexOf("deadline ") + "deadline ".length();
-        assert "deadline ".length() > userInput.length() : "why is your task description empty?";
-        assert userInput.contains("/by") : "you never put deadline then why use the deadline feature...";
-        if ("deadline ".length() > userInput.length()) {
-            throw new ChinChinException("why is your task description empty?");
-        } else if (!userInput.contains("/by")) {
-            throw new ChinChinException("you never put deadline then use the deadline feature for what??");
-        }
-        String deadlineDesc = userInput.substring(deadlineDescIndex, userInput.indexOf("/by")).trim();
+        String deadlineDesc = getDeadlineString(userInput);
 
         int byIndex = userInput.indexOf("/by");
         int endByIndex = byIndex + "/by ".length();
@@ -285,11 +336,33 @@ public class CustomList {
         return new Deadline(deadlineDesc, TaskType.DEADLINE, afterBy, userInput);
     }
 
+    /**
+     * Extracts the task description for a DEADLINE task from the user's input string.
+     *
+     * @param userInput The user's input string containing "deadline", followed by a
+     *                  description, and ending with "/by due date".
+     * @return A string representing only the description part of the DEADLINE task.
+     * @throws ChinChinException If any of these conditions occur:
+     *                           The user provided an empty or invalid description after "deadline".
+     *                           The user did not use "/by"
+     */
+    private static String getDeadlineString(String userInput) throws ChinChinException {
+        String deadlineString = "deadline ";
+        int deadlineDescIndex = userInput.indexOf(deadlineString) + deadlineString.length();
+
+        if (deadlineString.length() > userInput.length()) {
+            throw new ChinChinException("why is your task description empty?");
+        } else if (!userInput.contains("/by")) {
+            throw new ChinChinException("you never put deadline then use the deadline feature for what??");
+        }
+        return userInput.substring(deadlineDescIndex, userInput.indexOf("/by")).trim();
+    }
 
     /**
      * Calls createEventTask to create an EVENT task
      *
-     * @param userInput The user's input
+     * @param userInput The user's input containing "Event", followed by a task description,
+     *                  "/from date" and ending with "/by date".
      * @return The task description
      * @throws ChinChinException If the task description is empty, the starting time is missing,
      *                           or the ending time is missing
@@ -313,7 +386,7 @@ public class CustomList {
      */
     public static Event createEventTask(String userInput) throws ChinChinException {
         String eventString = "event ";
-        String eventDesc = getString(userInput, eventString);
+        String eventDesc = getEventString(userInput, eventString);
 
         int fromIndex = userInput.indexOf("/from ") + "/from ".length();
         int toIndex = userInput.indexOf("/to");
@@ -333,8 +406,9 @@ public class CustomList {
      * @throws ChinChinException If there is no event description, if there is no starting timing,
      *                           if there is no ending deadline
      */
-    private static String getString(String userInput, String eventString) throws ChinChinException {
+    private static String getEventString(String userInput, String eventString) throws ChinChinException {
         int eventDescIndex = userInput.indexOf(eventString) + eventString.length();
+
         if (eventString.length() > userInput.length()) {
             throw new ChinChinException("bro your event task got no description");
         } else if (!userInput.contains("/from")) {
@@ -367,6 +441,8 @@ public class CustomList {
 
     /**
      * Updates the list when there is any changes done to the list
+     *
+     * @throws ChinChinException When there's an error updating the list
      */
     public void updateList() throws ChinChinException {
         this.storage.updateList(customTaskList);
@@ -383,10 +459,11 @@ public class CustomList {
     }
 
     /**
-     * Locate for the tasks containing the keyword
+     * Searches the task list for tasks that contain the specified keyword.
      *
-     * @param keyword The keyword to search for
-     * @return
+     * @param keyword The keyword to search for in the task descriptions.
+     * @return A String containing all matching tasks, each listed with its index,
+     *      or a message stating "No matches la.." if no tasks match the keyword.
      */
     public String findKeyword(String keyword) {
         StringBuilder returnString = new StringBuilder();

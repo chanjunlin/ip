@@ -14,12 +14,14 @@ public class Deadline extends Task {
     private final LocalDateTime dueDate;
 
     /**
-     * Constructs a Deadline object with a description and duedate
+     * Constructs a Deadline object with a description and due date
      *
      * @param task      The task description
      * @param taskType  The type of Task, TaskType.DEADLINE
      * @param date      The input string containing the due date
      * @param userInput The user input to get the description of the task
+     * @throws ChinChinException If there is an error parsing the provided date string into
+     *                           the required format.
      */
     public Deadline(String task, TaskType taskType, String date, String userInput) throws ChinChinException {
         super(task, taskType, userInput);

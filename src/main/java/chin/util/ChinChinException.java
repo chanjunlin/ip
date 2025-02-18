@@ -4,7 +4,6 @@ package chin.util;
  * Custom class for handling exceptions
  */
 public class ChinChinException extends Exception {
-    private static final String line = "-------------------------------------";
 
     /**
      * constructs a new ChinChinException with a formatted message

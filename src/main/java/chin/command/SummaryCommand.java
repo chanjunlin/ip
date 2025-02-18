@@ -10,9 +10,6 @@ import chin.util.CustomList;
  */
 public class SummaryCommand extends ChinChinCommand {
 
-    public SummaryCommand() {
-    }
-
     /**
      * Executes the delete command
      *
@@ -44,5 +41,12 @@ public class SummaryCommand extends ChinChinCommand {
     @Override
     public String getcommandType() {
         return "summary";
+    }
+
+    @Override
+    public String displayHelpInfo() {
+        return """
+            help summary command
+            """;
     }
 }

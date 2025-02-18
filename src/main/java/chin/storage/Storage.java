@@ -29,7 +29,9 @@ public class Storage {
      * If it does, load the tasks from it.
      * Else, create a new file.
      *
-     * @return A CustomList containing tasks loaded from the the textfile or an empty CustomList if no file exists.
+     * @return A CustomList containing tasks loaded from the textfile or an empty CustomList if no file exists.
+     * @throws ChinChinException If there is an error loading tasks from the textfile
+     *         or creating a new one/directory structure.
      */
     public CustomList initialiseTasks() throws ChinChinException {
         File file = new File(actualFilePath);
@@ -42,7 +44,9 @@ public class Storage {
     }
 
     /**
-     * Create a new file for storing tasks.
+     * Creates a new file for storing tasks if it does not already exist.
+     *
+     * @throws ChinChinException If there's an issue creating the file or with its parent directories
      */
     public void createNewFile() throws ChinChinException {
         try {
@@ -60,9 +64,10 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the sepcified data file into a CustomList.
+     * Loads tasks from the specified data file into a CustomList.
      *
-     * @return A CustomList containing all tasks read from the text file
+     * @return A CustomList containing all tasks read from the text file.
+     * @throws ChinChinException When there's an issue reading the tasks or parsing its content.
      */
     public CustomList loadTasks() throws ChinChinException {
         CustomList taskList = new CustomList(actualFilePath);
@@ -85,6 +90,7 @@ public class Storage {
      * Updates the data file with current tasks in the storage
      *
      * @param taskList The ArrayList of Task objects to save to the text file
+     * @throws ChinChinException Throws an error when there's an error updating the list
      */
     public void updateList(List<Task> taskList) throws ChinChinException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(actualFilePath))) {
