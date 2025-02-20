@@ -94,4 +94,7 @@ public class Task {
         return this.taskDescription;
     }
 
+    public String getType() {
+        return "todo";
+    }
 }

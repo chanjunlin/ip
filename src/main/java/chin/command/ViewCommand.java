@@ -21,7 +21,7 @@ public class ViewCommand extends ChinChinCommand {
     private final LocalDate viewDate;
 
     public ViewCommand(String userInput) throws ChinChinException {
-        this.viewDate = parseDateFromInput(userInput);
+        this.viewDate = LocalDate.from(parseDateFromInput(userInput));
     }
 
     @Override
@@ -84,10 +84,14 @@ public class ViewCommand extends ChinChinCommand {
     }
 
     /**
-     * test
-     * @param userInput test
-     * @return test
-     * @throws ChinChinException test
+     * Parses a date from the given user input string that contains a "/on" keyword.
+     *
+     * @param userInput The user input string containing text and a date specified after "/on".
+     * @return A LocalDate object representing the parsed date from the user input.
+     * @throws ChinChinException If:
+     *                           The "/on" keyword is missing from the input.
+     *                           No valid date follows the "/on" keyword.
+     *                           The provided date does not match the "dd-MM-yyyy" format.
      */
     public LocalDate parseDateFromInput(String userInput) throws ChinChinException {
         if (!userInput.contains("/on")) {
@@ -100,11 +104,11 @@ public class ViewCommand extends ChinChinCommand {
 
         try {
             String trimmedDate = parts[1].trim();
-            return LocalDate.parse(trimmedDate);
-        } catch (Exception e){
-            throw new ChinChinException("Try using the proper format la.. If don't know use '[help date]'");
+            return LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (Exception e) {
+            throw new ChinChinException("Try using the proper format please.. If don't know use '[help date]'"
+                + e.getMessage());
         }
-
     }
 
     /**

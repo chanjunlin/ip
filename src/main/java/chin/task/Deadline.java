@@ -3,7 +3,6 @@ package chin.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import chin.util.ChinChinException;
 import chin.util.DateFormatter;
@@ -54,11 +53,15 @@ public class Deadline extends Task {
     public LocalDateTime parseDate(String dateString) throws ChinChinException {
         for (DateTimeFormatter format : DateFormatter.DATEFORMAT) {
             try {
+                if (!format.toString().contains(" HHmm")) {
+                    return LocalDate.parse(dateString.trim(), format).atStartOfDay();
+                }
                 return LocalDateTime.parse(dateString.trim(), format);
-            } catch (DateTimeParseException ignored) {
-                // ignored
+            } catch (Exception ignored) {
+                // Continue trying other formats
             }
         }
+
         throw new ChinChinException("Can you please choose proper date format?");
     }
 
@@ -66,4 +69,11 @@ public class Deadline extends Task {
     public boolean isScheduledOn(LocalDate targetDate) {
         return this.dueDate.toLocalDate().equals(targetDate);
     }
+
+    @Override
+    public String getType() {
+        return "deadline";
+    }
+
+
 }

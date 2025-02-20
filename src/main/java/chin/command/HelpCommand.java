@@ -9,7 +9,7 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * test
+ * Represents a command that shows the user the help commands
  */
 public class HelpCommand extends ChinChinCommand {
     private static final ArrayList<String> VALID_COMMANDS = new ArrayList<>(
@@ -72,8 +72,8 @@ public class HelpCommand extends ChinChinCommand {
         case "mark" -> "How to use 'MARK'? Just type:\nmark [index]";
         case "unmark" -> "How to use 'UNAMRK'? Just type:\nunamrk [index]";
         case "todo" -> "How to use 'TODO'? Just type:\ntodo [your task description]";
-        case "deadline" -> "How to use 'DEADLINE'? Just type:\ntodo [your task description] [/by] [date]";
-        case "event" -> "How to use 'EVENT'? Just type:\ntodo [your task description] [/from] [date] [/by] [date]";
+        case "deadline" -> "How to use 'DEADLINE'? Just type:\ndeadline [your task description] [/by] [date]";
+        case "event" -> "How to use 'EVENT'? Just type:\nevent [your task description] [/from] [date] [/by] [date]";
         case "summary" -> "Just type:\nsummary";
         case "view" -> "How to use 'VIEW'? Just type:\nview [/on] [date]";
         case "date" -> "Just in case I never specify, use [date] as 'dd-mm-yyyy' or dd/mm/yyyy'";
