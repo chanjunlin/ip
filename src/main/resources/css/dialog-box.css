@@ -7,13 +7,12 @@
     -fx-padding: 10px 20px 10px 20px;
     -fx-border-insets: 0px 7px 0px 7px;
     -fx-background-insets: 0px 7px 0px 7px;
-    /** -fx-font-family: "Arial"; **/
 }
 
 .reply-label {
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;
-    -fx-background-color: #a1887f;
+    -fx-background-color: #baaa9c;
     -fx-text-fill: white;
 }
 
@@ -23,7 +22,7 @@
 }
 
 .marked-label {
-    -fx-text-fill: #FAF0E6;
+    -fx-text-fill: #d67a11;
 }
 
 .delete-label {
@@ -31,7 +30,7 @@
 }
 
 .error-label {
-    -fx-text-fill:salmon;
+    -fx-text-fill:#bd301a;
 }
 
 #displayPicture {

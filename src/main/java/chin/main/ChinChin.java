@@ -34,7 +34,10 @@ public class ChinChin {
     }
 
     /**
-     * Testing
+     * Process the user's input
+     *
+     * @param text Takes in the user's input
+     * @return String returns the message for the dialog box
      */
     public String processUserInput(String text) {
         try {
@@ -42,7 +45,6 @@ public class ChinChin {
             commandType = command.getcommandType();
             return command.execute(customList, chinChinUI, storage);
         } catch (ChinChinException e) {
-            System.out.println(e.getMessage() + "==========");
             return e.getMessage();
         }
     }

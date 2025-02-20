@@ -83,11 +83,19 @@ public class Event extends Task {
     public LocalDateTime parseDate(String dateString) throws ChinChinException {
         for (DateTimeFormatter format : DateFormatter.DATEFORMAT) {
             try {
+                if (!format.toString().contains(" HHmm")) {
+                    return LocalDate.parse(dateString.trim(), format).atStartOfDay();
+                }
                 return LocalDateTime.parse(dateString.trim(), format);
             } catch (DateTimeParseException ignored) {
                 // ignored
             }
         }
         throw new ChinChinException("Can you please choose proper date format?");
+    }
+
+    @Override
+    public String getType() {
+        return "event";
     }
 }

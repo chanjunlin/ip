@@ -16,13 +16,13 @@ public class CustomList {
     private static final String STRING_INFO = "Oki, task added liao ✅:\n";
     private static final String STRING_NOT_LONG = "er.. check again! The list not that long.";
 
-    private final ArrayList<Task> customTaskList;
+    private ArrayList<Task> customTaskList;
     private Storage storage;
 
     /**
      * Create a new custom list with the file path to write to
      */
-    public CustomList() {
+    public CustomList(String filePath) {
         customTaskList = new ArrayList<>();
     }
 
@@ -33,6 +33,20 @@ public class CustomList {
      */
     public void addToList(Task task) {
         customTaskList.add(task);
+        sortTasks();
+    }
+
+    private void sortTasks() {
+        customTaskList.sort((task1, task2) -> Integer.compare(getPriority(task1), getPriority(task2)));
+    }
+
+    private int getPriority(Task task) {
+        return switch (task.getType()) {
+        case "todo" -> 1;
+        case "deadline" -> 2;
+        case "event" -> 3;
+        default -> Integer.MAX_VALUE;
+        };
     }
 
     /**
@@ -59,14 +73,9 @@ public class CustomList {
      * @return The string containing all the tasks in the list
      */
     public String showList() {
-        StringBuilder returnString = new StringBuilder();
+        return "Here are the tasks in your list: " + "\n\n" + getTodoList() + "\n" + getDeadlineList()
+            + "\n" + getEventList();
 
-        if (customTaskList.isEmpty()) {
-            return "List empty la";
-        } else {
-            returnString.append("Here are the tasks in your list: ").append("\n");
-            return returnString + getTodoList() + getDeadlineList() + getEventList();
-        }
     }
 
     /**
@@ -111,7 +120,7 @@ public class CustomList {
             todoString.append(emptyListScenario("task"));
         }
 
-        return "Todo \uD83D\uDCDD\n" + todoString + "\n";
+        return "[Todo \uD83D\uDCDD]:\n" + todoString + "\n";
     }
 
     /**
@@ -122,9 +131,10 @@ public class CustomList {
      */
     public String getDeadlineList() {
         ArrayList<Task> deadlineList = filterTaskByTag("[D]");
+        ArrayList<Task> todoList = filterTaskByTag("[T]");
         StringBuilder deadlineString = new StringBuilder();
         int maxWidth = String.valueOf(deadlineList.size()).length();
-        int deadlineIndex = 1;
+        int deadlineIndex = todoList.size() + 1;
 
         for (Task task : deadlineList) {
             int paddedIndex = getPadding(maxWidth, String.valueOf(deadlineIndex).length());
@@ -137,7 +147,7 @@ public class CustomList {
             deadlineString.append(emptyListScenario("deadline"));
         }
 
-        return "Deadline ⏰:\n" + deadlineString + "\n";
+        return "[Deadline ⏰]:\n" + deadlineString + "\n";
     }
 
     /**
@@ -147,10 +157,13 @@ public class CustomList {
      *      or an empty-list scenario message if no Event tasks exist.
      */
     public String getEventList() {
+        ArrayList<Task> todoList = filterTaskByTag("[T]");
+        ArrayList<Task> deadlineList = filterTaskByTag("[D]");
         ArrayList<Task> eventList = filterTaskByTag("[E]");
+
         StringBuilder eventString = new StringBuilder();
         int maxWidth = String.valueOf(eventList.size()).length();
-        int eventIndex = 1;
+        int eventIndex = todoList.size() + deadlineList.size() + 1;
 
         for (Task task : eventList) {
             int paddedIndex = getPadding(maxWidth, String.valueOf(eventIndex).length());
@@ -163,7 +176,7 @@ public class CustomList {
             eventString.append(emptyListScenario("event"));
         }
 
-        return "Event \uD83D\uDCC5:\n" + eventString;
+        return "[Event \uD83D\uDCC5]:\n" + eventString;
     }
 
     /**
@@ -393,10 +406,13 @@ public class CustomList {
         int fromIndex = userInput.indexOf("/from ") + "/from ".length();
         int toIndex = userInput.indexOf("/to");
         String betweenFromAndTo = userInput.substring(fromIndex, toIndex).trim();
+        try {
+            String afterTo = userInput.substring(toIndex + "/to ".length()).trim();
 
-        String afterTo = userInput.substring(toIndex + "/to ".length()).trim();
-
-        return new Event(eventDesc, TaskType.EVENT, betweenFromAndTo, afterTo, userInput);
+            return new Event(eventDesc, TaskType.EVENT, betweenFromAndTo, afterTo, userInput);
+        } catch (Exception e) {
+            throw new ChinChinException("jialat.. Let you see the error message for fun\n[" + e.toString() + "]");
+        }
     }
 
     /**
@@ -431,6 +447,7 @@ public class CustomList {
     public String deleteTask(int index) throws ChinChinException {
         try {
             index -= 1;
+
             Task currentTask = customTaskList.get(index);
             String taskInfo = currentTask.show();
             customTaskList.remove(index);
@@ -488,15 +505,16 @@ public class CustomList {
     }
 
     /**
-     * test
-     * @param targetDate test
-     * @return test
+     * Filters all the tasks by the date
+     *
+     * @param targetDate The specified date
+     * @return The ArrayList of the tasks on the specified date
      */
     public ArrayList<Task> filterTasksByDate(LocalDate targetDate) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
 
         for (Task task : customTaskList) {
-            if (task.isScheduledOn(targetDate)) {
+            if (task.isScheduledOn(LocalDate.from(targetDate))) {
                 filteredTasks.add(task);
             }
         }
