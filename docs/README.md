@@ -8,24 +8,56 @@ Welcome to ChinChin. This simple and humble yet powerful CLI-based productivity 
 deadlines, and events effortlessly. Designed for users who prefer lightweight tools over complicated apps, ChinChin
 makes managing tasks quick and easy.
 
-## Adding deadlines
+## Exit Program
+Command: ```bye```,```goodbye```
 
-// Describe the action and its outcome.
+Exits the program.
 
-// Give examples of usage
+Example: `bye`
 
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
+ChinChin would say goodbye and close the program.
 
 ```
 expected output
 ```
 
-## Feature ABC
+## Delete Tasks
+Command: ```delete```
 
-// Feature details
+Deletes a task from your list.
+
+Syntax: delete [task number]
+
+Example: `delete [2]`
+
+ChinChin would help to delete the task with the specified index.
+
+```
+expected output
+```
+
+
+## Find Task
+Command: ```find```
+
+Find the task(s) with the given keyword.
+
+Syntax: find [key word]
+
+Example: `find book`
+
+ChinChin would help to collate all the tasks with the given keyword.
+
+```
+expected output
+```
+
 
 ## Feature XYZ
+
+## Feature XYZ
+
+
+
 
 // Feature details
