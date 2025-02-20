@@ -214,7 +214,7 @@ public class CustomList {
         return """
             Here’s your summary:
             📝 Todos      : %d
-            ⏰ Deadlines  : %d
+            ⏰ Deadlines   : %d
             📅 Events     : %d
             """.formatted(totalTodos, totalDeadlines, totalEvents);
     }
@@ -491,9 +491,9 @@ public class CustomList {
             String taskDescription = customTaskList.get(i).show();
             if (taskDescription.contains(keyword)) {
                 if (isEmpty) {
-                    returnString = new StringBuilder("Here's some of the matches: ");
+                    returnString = new StringBuilder("Here's some of the matches:\n");
                 }
-                returnString.append(i + 1).append(". ").append(taskDescription);
+                returnString.append(i + 1).append(". ").append(taskDescription).append("\n");
                 isEmpty = false;
             }
         }
