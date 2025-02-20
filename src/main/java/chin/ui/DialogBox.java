@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,6 +53,16 @@ public class DialogBox extends HBox {
         clip.setCenterX(25);
         clip.setCenterY(25);
         displayPicture.setClip(clip);
+        dialog.setText(text);
+        dialog.setStyle("-fx-font-family: 'Courier New'; -fx-font-weight: bold"); // Apply monospace font
+
+        // Dynamically adjust height based on line count and estimated line height
+        int lineCount = text.split("\n").length; // Count number of lines
+        int lineHeight = 20; // Approximate height per line with padding/font size
+        int minimumHeight = lineCount * lineHeight;
+
+        dialog.setWrapText(true); // Enable wrapping just in case
+        dialog.setMinHeight(minimumHeight); // Adjust minimum height dynamically
     }
 
     /**
@@ -72,7 +81,6 @@ public class DialogBox extends HBox {
      *
      * @param text The message to be displayed in the dialog box.
      * @param img  The image representing the user's profile picture.
-     *
      * @return A DialogBox containing the provided text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -85,7 +93,6 @@ public class DialogBox extends HBox {
      * @param text        The message to be displayed in Chin's dialog box.
      * @param img         The image representing Chin's avatar/profile picture.
      * @param commandType The type of command that determines how Chin's dialog should be styled
-     *
      * @return A styled DialogBox containing Chin's response along with customized visuals.
      */
     public static DialogBox getChinDialog(String text, Image img, String commandType) {
@@ -105,6 +112,11 @@ public class DialogBox extends HBox {
      *                     applies.
      */
     private void changeDialogStyle(String commandType, String startingWord) {
+        if (commandType == null) {
+            dialog.getStyleClass().add("default-label");
+            return;
+        }
+
         switch (commandType) {
         case "add":
             if (validWords.contains(startingWord)) {

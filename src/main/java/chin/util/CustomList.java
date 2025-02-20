@@ -1,5 +1,6 @@
 package chin.util;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import chin.storage.Storage;
@@ -13,6 +14,7 @@ import chin.task.TaskType;
  */
 public class CustomList {
     private static final String STRING_INFO = "Oki, task added liao ✅:\n";
+    private static final String STRING_NOT_LONG = "er.. check again! The list not that long.";
 
     private final ArrayList<Task> customTaskList;
     private Storage storage;
@@ -20,7 +22,7 @@ public class CustomList {
     /**
      * Create a new custom list with the file path to write to
      */
-    public CustomList(String userInput) {
+    public CustomList() {
         customTaskList = new ArrayList<>();
     }
 
@@ -135,7 +137,7 @@ public class CustomList {
             deadlineString.append(emptyListScenario("deadline"));
         }
 
-        return "Deadline \uu23f0:\n" + deadlineString + "\n";
+        return "Deadline ⏰:\n" + deadlineString + "\n";
     }
 
     /**
@@ -152,7 +154,7 @@ public class CustomList {
 
         for (Task task : eventList) {
             int paddedIndex = getPadding(maxWidth, String.valueOf(eventIndex).length());
-            eventString.append(eventString).append(".").append(" ".repeat(paddedIndex + 1)).append(task.show())
+            eventString.append(eventIndex).append(".").append(" ".repeat(paddedIndex + 1)).append(task.show())
                 .append("\n");
             eventIndex++;
         }
@@ -227,7 +229,7 @@ public class CustomList {
                 returnString.append("Marked already. You mean unmark ah?");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ChinChinException("er.. check again! The list not that long.");
+            throw new ChinChinException(STRING_NOT_LONG);
         }
         return returnString.toString();
     }
@@ -255,7 +257,7 @@ public class CustomList {
                 returnString.append("Not even marked. You mean mark ah?");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ChinChinException("er.. check again! The list not that long.");
+            throw new ChinChinException(STRING_NOT_LONG);
         }
         return returnString.toString();
     }
@@ -483,6 +485,23 @@ public class CustomList {
         } else {
             return returnString.toString();
         }
+    }
+
+    /**
+     * test
+     * @param targetDate test
+     * @return test
+     */
+    public ArrayList<Task> filterTasksByDate(LocalDate targetDate) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+
+        for (Task task : customTaskList) {
+            if (task.isScheduledOn(targetDate)) {
+                filteredTasks.add(task);
+            }
+        }
+
+        return filteredTasks;
     }
 
 }

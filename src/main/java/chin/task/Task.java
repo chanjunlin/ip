@@ -1,5 +1,7 @@
 package chin.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a generic task with a completion status and a name.
  */
@@ -46,6 +48,16 @@ public class Task {
     }
 
     /**
+     * Determines if this task is scheduled on a specific date.
+     *
+     * @param targetDate The LocalDate to check against.
+     * @return true if this task occurs on the given date, false otherwise.
+     */
+    public boolean isScheduledOn(LocalDate targetDate) {
+        return false;
+    }
+
+    /**
      * Get the tag representing the type of this task
      *
      * @return The tag associated with the task type
@@ -69,8 +81,8 @@ public class Task {
      * @return A formatted string showing whether it's completed and its details
      */
     public String show() {
-        String header = (isDone ? "[\u2714\uFE0F]" : "[   ]");
-        return this.taskTag.getTag() + header + " " + this.taskDescription;
+        String header = (isDone ? "[\u2714\uFE0F]" : "[ ]");
+        return this.taskTag.getTag() + " " + header + " " + this.taskDescription;
     }
 
     /**
@@ -81,4 +93,5 @@ public class Task {
     public String getTaskDescription() {
         return this.taskDescription;
     }
+
 }

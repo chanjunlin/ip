@@ -13,6 +13,7 @@ import chin.command.ListCommand;
 import chin.command.MarkCommand;
 import chin.command.SummaryCommand;
 import chin.command.UnmarkCommand;
+import chin.command.ViewCommand;
 
 /**
  * Parses the user input and maps it to a specific ChinChinCommand
@@ -43,6 +44,7 @@ public class ChinChinParser {
         case ("unmark") -> new UnmarkCommand(userInput);
         case ("todo"), ("deadline"), ("event") -> new AddCommand(userInput);
         case ("summary") -> new SummaryCommand();
+        case ("view") -> new ViewCommand(userInput);
         default -> new BadCommand(userInput);
         };
     }
