@@ -6,7 +6,7 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * test
+ * Represents a command to return the summary of all the tasks
  */
 public class SummaryCommand extends ChinChinCommand {
 

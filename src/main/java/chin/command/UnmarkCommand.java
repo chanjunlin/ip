@@ -6,7 +6,7 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * Represents the UnmarkCommand to unmark a task at the specific index
+ * Represents a command to unmark a task at the specific index
  */
 public class UnmarkCommand extends ChinChinCommand {
 

@@ -6,7 +6,7 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * Represents the ExitCommand to end the program
+ * Represents a command to end the program
  */
 public class ExitCommand extends ChinChinCommand {
 
