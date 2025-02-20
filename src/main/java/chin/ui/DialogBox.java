@@ -24,7 +24,7 @@ import javafx.scene.shape.Circle;
 public class DialogBox extends HBox {
     private static final List<String> invalidWords =
         Arrays.asList("Oki", "your", "why", "you", "put", "bro", "if", "no", "jialat..", "key", "er..", "Task",
-            "Can", "No", "Use");
+            "Can", "No", "Use", "Try");
 
     @FXML
     private Label dialog;
