@@ -1,5 +1,6 @@
 package chin.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -39,6 +40,9 @@ public class Deadline extends Task {
         return super.show() + "\nDEADLINE: " + this.dueDate.format(displayFormatter);
     }
 
+    public LocalDateTime getDeadline() {
+        return this.dueDate;
+    }
 
     /**
      * Parses a date string into a LocalDateTime object based on supported date formats in DateFormatter
@@ -47,7 +51,6 @@ public class Deadline extends Task {
      * @return A LocalDateTime object representing the parsed date and time.
      * @throws ChinChinException If no matching format is found, indicating an unsupported or invalid format.
      */
-
     public LocalDateTime parseDate(String dateString) throws ChinChinException {
         for (DateTimeFormatter format : DateFormatter.DATEFORMAT) {
             try {
@@ -57,5 +60,10 @@ public class Deadline extends Task {
             }
         }
         throw new ChinChinException("Can you please choose proper date format?");
+    }
+
+    @Override
+    public boolean isScheduledOn(LocalDate targetDate) {
+        return this.dueDate.toLocalDate().equals(targetDate);
     }
 }

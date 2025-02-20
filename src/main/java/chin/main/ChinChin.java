@@ -42,6 +42,7 @@ public class ChinChin {
             commandType = command.getcommandType();
             return command.execute(customList, chinChinUI, storage);
         } catch (ChinChinException e) {
+            System.out.println(e.getMessage() + "==========");
             return e.getMessage();
         }
     }
