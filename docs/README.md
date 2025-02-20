@@ -1,10 +1,12 @@
-# Duke User Guide
+# ChinChin User Guide
 
-// Update the title above to match the actual product name
+![ChinChin](Ui.png)
 
-// Product screenshot goes here
+## Introduction
 
-// Product intro goes here
+Welcome to ChinChin. This simple and humble yet powerful CLI-based productivity tool helps you keep track of todos,
+deadlines, and events effortlessly. Designed for users who prefer lightweight tools over complicated apps, ChinChin
+makes managing tasks quick and easy.
 
 ## Adding deadlines
 
@@ -23,7 +25,6 @@ expected output
 ## Feature ABC
 
 // Feature details
-
 
 ## Feature XYZ
 
