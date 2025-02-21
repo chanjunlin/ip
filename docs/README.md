@@ -21,7 +21,8 @@ Syntax: todo [task description]
 Example: todo read a book
 
 ```expected output```
-```Oki, task added liao ✅:
+```
+Oki, task added liao ✅:
 [T] [ ] read a book
 Now you got 1 task in the list.
 ```
@@ -32,7 +33,8 @@ Syntax: deadline [task description] /by [dd-MM-yyyy HHmm]
 Example: deadline read a book /by 12-12-2025 1234
 
 ```expected output```
-```Oki, task added liao ✅:
+```
+Oki, task added liao ✅:
 [D] [ ] read a book
 DEADLINE: Dec 12 2025 12:34 pm
 Now you got 1 task in the list.
@@ -44,7 +46,8 @@ Syntax: event [task description] /from [dd-MM-yyyy HHmm] /to [dd-MM-yyyy HHmm]
 Example: event read a book /from 12-12-2025 1234 /to 12-12-2025 2345
 
 ```expected output```
-```Oki, task added liao ✅:
+```
+Oki, task added liao ✅:
 [E] [ ] read a book (FROM: Dec 12 2025 12:34 pm TO: Dec 12 2025 11.45 pm)
 Now you got 1 task in the list.
 ```

@@ -3,6 +3,7 @@ package chin.util;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import chin.main.ChinChin;
 import chin.storage.Storage;
 import chin.task.Deadline;
 import chin.task.Event;
@@ -302,7 +303,7 @@ public class CustomList {
         String todoString = "todo ";
         int todoDescIndex = userInput.indexOf(todoString);
         String todoDesc = userInput.substring(todoDescIndex + (todoString.length())).trim();
-        if ((todoString.length()) > userInput.length()) {
+        if ((todoString.length()) >= userInput.length()) {
             throw new ChinChinException("your task description is empty bro..");
         }
         return new Task(todoDesc, TaskType.TODO, userInput);
@@ -342,13 +343,15 @@ public class CustomList {
         int byIndex = userInput.indexOf("/by");
         int endByIndex = byIndex + "/by ".length();
 
-        if (endByIndex > userInput.length()) {
-            throw new ChinChinException("put /by and no deadline abit...");
+        try {
+            String afterBy = userInput.substring(endByIndex).trim();
+
+            return new Deadline(deadlineDesc, TaskType.DEADLINE, afterBy, userInput);
+        } catch (ChinChinException e) {
+            throw new ChinChinException("Can you please choose proper date format?");
+        } catch (Exception e) {
+            throw new ChinChinException("jialat.. Please remember to key in your dates after '/by' hor, thanks");
         }
-
-        String afterBy = userInput.substring(endByIndex).trim();
-
-        return new Deadline(deadlineDesc, TaskType.DEADLINE, afterBy, userInput);
     }
 
     /**
@@ -365,7 +368,7 @@ public class CustomList {
         String deadlineString = "deadline ";
         int deadlineDescIndex = userInput.indexOf(deadlineString) + deadlineString.length();
 
-        if (deadlineString.length() > userInput.length()) {
+        if (deadlineString.length() >= userInput.length()) {
             throw new ChinChinException("why is your task description empty?");
         } else if (!userInput.contains("/by")) {
             throw new ChinChinException("you never put deadline then use the deadline feature for what??");
@@ -410,8 +413,11 @@ public class CustomList {
             String afterTo = userInput.substring(toIndex + "/to ".length()).trim();
 
             return new Event(eventDesc, TaskType.EVENT, betweenFromAndTo, afterTo, userInput);
+        } catch (ChinChinException e) {
+            throw new ChinChinException("Can you please choose proper date format?");
         } catch (Exception e) {
-            throw new ChinChinException("jialat.. Let you see the error message for fun\n[" + e.toString() + "]");
+            throw new ChinChinException("jialat.. Please remember to key in your dates after '/from' and '/to' hor, "
+                + "thanks");
         }
     }
 
@@ -427,7 +433,7 @@ public class CustomList {
     private static String getEventString(String userInput, String eventString) throws ChinChinException {
         int eventDescIndex = userInput.indexOf(eventString) + eventString.length();
 
-        if (eventString.length() > userInput.length()) {
+        if (eventString.length() >= userInput.length()) {
             throw new ChinChinException("bro your event task got no description");
         } else if (!userInput.contains("/from")) {
             throw new ChinChinException("if you don't state the starting, then just use 'deadline' feature");
