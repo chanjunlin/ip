@@ -6,11 +6,12 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * Represents the MarkCommand that will mark the task at the specific index
+ * Represents a command that will mark the task at the specific index
  */
 public class MarkCommand extends ChinChinCommand {
 
     private final int indexToMark;
+    private final String commandType = "mark";
 
     public MarkCommand(String userInput) throws ChinChinException {
         this.indexToMark = extractIndex(userInput);
@@ -72,7 +73,7 @@ public class MarkCommand extends ChinChinCommand {
      */
     @Override
     public String getcommandType() {
-        return "mark";
+        return this.commandType;
     }
 
     @Override

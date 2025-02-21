@@ -6,7 +6,7 @@ import chin.util.ChinChinException;
 import chin.util.CustomList;
 
 /**
- * test
+ * Represent a command to send a greeting to the user
  */
 public class GreetingCommand extends ChinChinCommand {
 

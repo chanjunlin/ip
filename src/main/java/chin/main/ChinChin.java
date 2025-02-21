@@ -34,7 +34,10 @@ public class ChinChin {
     }
 
     /**
-     * Testing
+     * Process the user's input
+     *
+     * @param text Takes in the user's input
+     * @return String returns the message for the dialog box
      */
     public String processUserInput(String text) {
         try {

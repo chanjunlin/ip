@@ -3,6 +3,7 @@ package chin.ui;
 import java.util.Objects;
 
 import chin.main.ChinChin;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for the main GUI.
@@ -62,6 +64,15 @@ public class MainWindow extends AnchorPane {
             DialogBox.getChinDialog(chinText, chinChinImage, commandType)
         );
         userInput.clear();
+
+
+        if (commandType.equals("exit")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(event -> {
+                System.exit(0);
+            });
+            pause.play();
+        }
     }
 
     /**
@@ -69,7 +80,7 @@ public class MainWindow extends AnchorPane {
      */
     private void displayGreeting() {
         String greetingMessage = "Nihao, I'm ChinChin\nWhat you want?";
-        DialogBox greetingDialog = DialogBox.getChinDialog(greetingMessage, chinChinImage, "null");
+        DialogBox greetingDialog = DialogBox.getChinDialog(greetingMessage, chinChinImage, "greetings");
         dialogContainer.getChildren().add(greetingDialog);
     }
 }
