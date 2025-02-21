@@ -53,7 +53,11 @@ public class HelpCommand extends ChinChinCommand {
                  ✅ mark                     -> Mark an item
                  ❌ unmark                   -> Unmark an item
                  📅 todo, deadline, event    -> Add a new event, to-do, or deadline
+<<<<<<< HEAD
+                 ✍️ summary                  -> Helpfully show you the summary of your tasks
+=======
                  ✍️ summary                   -> Helpfully show you the summary of your tasks
+>>>>>>> master
                  📋 view                     -> View the schedule for a specific date
                  🗓 date                     -> Show you the correct date format
                 """;
@@ -72,8 +76,8 @@ public class HelpCommand extends ChinChinCommand {
         case "mark" -> "How to use 'MARK'? Just type:\nmark [index]";
         case "unmark" -> "How to use 'UNAMRK'? Just type:\nunamrk [index]";
         case "todo" -> "How to use 'TODO'? Just type:\ntodo [your task description]";
-        case "deadline" -> "How to use 'DEADLINE'? Just type:\ndeadline [your task description] [/by] [date]";
-        case "event" -> "How to use 'EVENT'? Just type:\nevent [your task description] [/from] [date] [/by] [date]";
+        case "deadline" -> "How to use 'DEADLINE'? Just type:\ndeadline [your task description] /by [date]";
+        case "event" -> "How to use 'EVENT'? Just type:\nevent [your task description] /from [date] /by [date]";
         case "summary" -> "Just type:\nsummary";
         case "view" -> "How to use 'VIEW'? Just type:\nview [/on] [date]";
         case "date" -> "Just in case I never specify, use [date] as 'dd-mm-yyyy' or dd/mm/yyyy'";

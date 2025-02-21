@@ -236,7 +236,7 @@ public class CustomList {
             if (!isMarked) {
                 currentTask.mark();
                 updateList();
-                returnString.append("Orh, marked the task as done liao!");
+                returnString.append("Orh, marked the task as done liao!\n");
                 returnString.append(currentTask.show());
             } else {
                 returnString.append("Marked already. You mean unmark ah?");
@@ -264,7 +264,7 @@ public class CustomList {
             if (isMarked) {
                 currentTask.unmark();
                 updateList();
-                returnString.append("Orh, marked the task as undone liao!");
+                returnString.append("Orh, marked the task as undone liao!\n");
                 returnString.append(currentTask.show());
             } else {
                 returnString.append("Not even marked. You mean mark ah?");
