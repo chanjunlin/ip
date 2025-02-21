@@ -39,7 +39,9 @@ public class Storage {
             return loadTasks();
         } else {
             createNewFile();
-            return new CustomList(actualFilePath);
+            CustomList taskList = new CustomList(actualFilePath);
+            taskList.setStorage(this);
+            return taskList;
         }
     }
 

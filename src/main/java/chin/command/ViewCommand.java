@@ -3,6 +3,7 @@ package chin.command;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import chin.storage.Storage;
@@ -12,6 +13,7 @@ import chin.task.Task;
 import chin.ui.ChinChinUI;
 import chin.util.ChinChinException;
 import chin.util.CustomList;
+import chin.util.DateFormatter;
 
 /**
  * Represent a command to display the tasks on the interested date.
@@ -104,11 +106,18 @@ public class ViewCommand extends ChinChinCommand {
 
         try {
             String trimmedDate = parts[1].trim();
-            return LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            for (DateTimeFormatter formatter : DateFormatter.DATEFORMAT) {
+                try {
+                    return LocalDate.parse(trimmedDate, formatter);
+                } catch (DateTimeParseException e) {
+                    // Continue trying other formats if this one fails
+                }
+            }
         } catch (Exception e) {
             throw new ChinChinException("Try using the proper format please.. If don't know use '[help date]'"
                 + e.getMessage());
         }
+        throw new ChinChinException("This is a magical error");
     }
 
     /**
@@ -119,7 +128,7 @@ public class ViewCommand extends ChinChinCommand {
      */
     private String generateScheduleMessage(ArrayList<Task> tasksForDay) {
         if (tasksForDay.isEmpty()) {
-            return "No scheduled tasks found for " + viewDate + ".";
+            return "Got no scheduled tasks found for " + viewDate + ".";
         }
 
         ArrayList<Deadline> deadlineTasks = getDeadlineTasks(tasksForDay);
