@@ -18,7 +18,7 @@ public class ChinChinUI {
     /**
      * Display bot's greeting message.
      *
-     * @return
+     * @return The greeting string
      */
     public static String displayGreeting() {
         return "Nihao, I'm ChinChin\nWhat you want?";
@@ -27,7 +27,7 @@ public class ChinChinUI {
     /**
      * Display bot's farewell message.
      *
-     * @return
+     * @return The farewell string
      */
     public static String goodbye() {
         return "Bye. Hope to see you again soon!";
