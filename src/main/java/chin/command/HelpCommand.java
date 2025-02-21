@@ -44,12 +44,18 @@ public class HelpCommand extends ChinChinCommand {
     public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
         if (helpRequest == null) {
             return """
-                 hi, hello, greetings   -> Get a greeting,
-                 🗑️ delete              -> Delete an item
-                 🔍 find                -> Find an item
-                 ✅ mark                -> Mark an item
-                 ❌ unmark              -> Unmark an item
-                 📅 todo, deadline, event -> Add a new event, to-do, or deadline
+                 [Here are the available commands]
+                 👋 hi, hello, greetings     -> Pretty self-explanatory
+                 👋 bye, goodbye             -> Pretty self-explanatory
+                 🗑 delete                   -> Erm.. delete your task
+                 🔍 find                     -> Find an item
+                 📑 list                     -> List out your entire list lor
+                 ✅ mark                     -> Mark an item
+                 ❌ unmark                   -> Unmark an item
+                 📅 todo, deadline, event    -> Add a new event, to-do, or deadline
+                 ✍️ summary                  -> Helpfully show you the summary of your tasks
+                 📋 view                     -> View the schedule for a specific date
+                 🗓 date                     -> Show you the correct date format
                 """;
         } else {
             return getSpecificHelp();
@@ -66,10 +72,12 @@ public class HelpCommand extends ChinChinCommand {
         case "mark" -> "Help you mark your tasks as done";
         case "unmark" -> "Help you unmark your tasks as undone";
         case "todo" -> "How to use 'TODO'? Just type:\ntodo [your task description]";
-        case "deadline" -> "How to use 'DEADLINE', Just type:\ntodo [your task description] [/by] [date]";
-        case "event" -> "How to use 'EVENT', Just type:\ntodo [your task description] [/from] [date] [/by] [date]";
-        case "summary" -> "Helpfully show you the summary of your tasks ";
-        default -> "Er no idea boss";
+        case "deadline" -> "How to use 'DEADLINE'? Just type:\ndeadline [your task description] /by [date]";
+        case "event" -> "How to use 'EVENT'? Just type:\nevent [your task description] /from [date] /by [date]";
+        case "summary" -> "Just type:\nsummary";
+        case "view" -> "How to use 'VIEW'? Just type:\nview [/on] [date]";
+        case "date" -> "Just in case I never specify, use [date] as 'dd-mm-yyyy' or dd/mm/yyyy'";
+        default -> "Use [help] to see all the commands please...";
         };
     }
 

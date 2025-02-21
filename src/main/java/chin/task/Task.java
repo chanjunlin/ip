@@ -69,8 +69,13 @@ public class Task {
      * @return A formatted string showing whether it's completed and its details
      */
     public String show() {
+<<<<<<< Updated upstream
         String header = (isDone ? "[\u2714\uFE0F]" : "[   ]");
         return this.taskTag.getTag() + header + " " + this.taskDescription;
+=======
+        String header = (isDone ? "[✔️]" : "[ ]");
+        return this.taskTag.getTag() + " " + header + " " + this.taskDescription;
+>>>>>>> Stashed changes
     }
 
     /**
