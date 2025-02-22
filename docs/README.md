@@ -230,37 +230,39 @@ Schedule for 2025-12-12:
 
 For all commands requiring dates and times, ChinChin supports these formats:
 
-1. Use dashes (`-`) or slashes (`/`) as separators:
+Syntax: 
     - `dd-MM-yyyy HHmm`
     - `dd/MM/yyyy HHmm`
 
-2. Examples:
+Examples:
     - With time: `deadline submit report /by 25-12-2023 1400`
     - Without time: `event team meeting /from 01/01/2024 /to 03/01/2024`
       (defaults to midnight if time is not provided)
 
-3. Default Behavior:
+Default Behavior:
    If you omit the time (`HHmm`), it will default to midnight (`00:00`).
-
----
 
 ### Deadline
 Syntax: deadline [task description] /by [dd-MM-yyyy HHmm]
 
-> Note: The accepted date format is either `"dd-MM-yyyy HHmm"` (e.g., `12-12-2025 1234`)  
-> or `"dd/MM/yyyy HHmm"` (e.g., `12/12/2025`). If no time is provided, it defaults to midnight (`00:00`).
-
-Example: deadline read a book /by **12-12-2025** **1234**
+Example: `deadline read a book /by 12-12-2025`
 
 ```expected output```
+```
+Oki, task added liao ✅: 
+[D] [ ] Read a book
+DEADLINE: Dec 12 2025 12:00 am
+Now you got 1 tasks in the list.
+```
 
 ### Event
 Syntax: event [task description] /from [dd-MM-yyyy HHmm] /to [dd-MM-yyyy HHmm]
-
-> Note: Supported date-time formats are `"dd-MM-yyyy HHmm"` and `"dd/MM/yyyy HHmm"`.  
-> Example input could be `/from **21-02-2025** **1200** /to **21/02/2025** **1500`.
-
-Example Command:
-event team meeting /from **21-02-2025** **1200** /to **21/02/2025** **1500**
+ 
+Example: `event complete CS2107 Assignment 1 /from 21-02-2025 1200 /to 21/02/2025`.
 
 ```expected output```
+```
+Oki, task added liao ✅:
+[E] [ ] complete CS2107 Assignment 1 (FROM: Feb 21 2025 12:00 pm TO: Feb 21 2025 12:00 am)
+Now you got 1 tasks in the list.
+```
