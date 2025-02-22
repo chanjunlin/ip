@@ -3,7 +3,6 @@ package chin.util;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import chin.main.ChinChin;
 import chin.storage.Storage;
 import chin.task.Deadline;
 import chin.task.Event;
@@ -38,7 +37,35 @@ public class CustomList {
     }
 
     private void sortTasks() {
-        customTaskList.sort((task1, task2) -> Integer.compare(getPriority(task1), getPriority(task2)));
+        customTaskList.sort((task1, task2) -> {
+            int priorityComparison = Integer.compare(getPriority(task1), getPriority(task2));
+
+            if (priorityComparison == 0) {
+                if (task1.getType().equals("deadline") && task2.getType().equals("deadline")) {
+                    return compareDeadlines((Deadline) task1, (Deadline) task2);
+                } else if (task1.getType().equals("event") && task2.getType().equals("event")) {
+                    return compareEvents((Event) task1, (Event) task2);
+                }
+            }
+            return priorityComparison;
+        });
+    }
+
+    private int compareDeadlines(Deadline deadline1, Deadline deadline2) {
+        if (deadline1.getDeadline() != null && deadline2.getDeadline() != null) {
+            return deadline1.getDeadline().compareTo(deadline2.getDeadline());
+        }
+        return 0;
+    }
+
+    private int compareEvents(Event event1, Event event2) {
+        int startComparison = event1.getStarting().compareTo(event2.getStarting());
+
+        if (startComparison != 0) {
+            return startComparison;
+        }
+
+        return event1.getEnding().compareTo(event2.getEnding());
     }
 
     private int getPriority(Task task) {
@@ -88,9 +115,7 @@ public class CustomList {
     public ArrayList<Task> filterTaskByTag(String taskTag) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : this.customTaskList) {
-            if (!task.getTag().equals(taskTag)) {
-                continue;
-            } else {
+            if (task.getTag().equals(taskTag)) {
                 filteredTasks.add(task);
             }
         }

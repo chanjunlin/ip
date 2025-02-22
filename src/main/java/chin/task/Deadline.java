@@ -11,6 +11,8 @@ import chin.util.DateFormatter;
  * Represent a DEADLINE task with a due date
  */
 public class Deadline extends Task {
+    private static final String CONTAINS_TIME = "Value(HourOfDay,2)Value(MinuteOfHour,2)";
+
     private final LocalDateTime dueDate;
 
     /**
@@ -39,8 +41,14 @@ public class Deadline extends Task {
         return super.show() + "\nDEADLINE: " + this.dueDate.format(displayFormatter);
     }
 
+    @Override
     public LocalDateTime getDeadline() {
         return this.dueDate;
+    }
+
+    @Override
+    public String getType() {
+        return "deadline";
     }
 
     /**
@@ -53,10 +61,11 @@ public class Deadline extends Task {
     public LocalDateTime parseDate(String dateString) throws ChinChinException {
         for (DateTimeFormatter format : DateFormatter.DATEFORMAT) {
             try {
-                if (!format.toString().contains(" HHmm")) {
+                if (format.toString().contains(CONTAINS_TIME)) {
+                    return LocalDateTime.parse(dateString.trim(), format);
+                } else {
                     return LocalDate.parse(dateString.trim(), format).atStartOfDay();
                 }
-                return LocalDateTime.parse(dateString.trim(), format);
             } catch (Exception ignored) {
                 // Continue trying other formats
             }
@@ -65,15 +74,15 @@ public class Deadline extends Task {
         throw new ChinChinException("Can you please choose proper date format?");
     }
 
+    /**
+     * Return True if the current dueDate is the same as the targetDate
+     *
+     * @param targetDate The LocalDate to check against.
+     * @return  True if the LocalDate matches the targetDate else, false.
+     */
     @Override
     public boolean isScheduledOn(LocalDate targetDate) {
         return this.dueDate.toLocalDate().equals(targetDate);
     }
-
-    @Override
-    public String getType() {
-        return "deadline";
-    }
-
 
 }
