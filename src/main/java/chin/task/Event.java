@@ -3,7 +3,6 @@ package chin.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import chin.util.ChinChinException;
 import chin.util.DateFormatter;
@@ -12,8 +11,11 @@ import chin.util.DateFormatter;
  * Represents an event task with starting and ending date
  */
 public class Event extends Task {
+    private static final String CONTAINS_TIME = "Value(HourOfDay,2)Value(MinuteOfHour,2)";
+
     private LocalDateTime startingDate;
     private LocalDateTime endingDate;
+
 
     /**
      * Constructs an Event object with a description, starting and ending
@@ -42,10 +44,16 @@ public class Event extends Task {
             + this.endingDate.format(displayFormatter) + ")";
     }
 
+    /**
+     * Return True if the current dueDate is the same as the targetDate
+     *
+     * @param targetDate The LocalDate to check against.
+     * @return  True if the LocalDate matches the targetDate else, false.
+     */
     @Override
-    public boolean isScheduledOn(LocalDate target) {
-        return (target.isEqual(startingDate.toLocalDate()) || target.isAfter(startingDate.toLocalDate()))
-            && (target.isEqual(endingDate.toLocalDate()) || target.isBefore(endingDate.toLocalDate()));
+    public boolean isScheduledOn(LocalDate targetDate) {
+        return (targetDate.isEqual(startingDate.toLocalDate()) || targetDate.isAfter(startingDate.toLocalDate()))
+            && (targetDate.isEqual(endingDate.toLocalDate()) || targetDate.isBefore(endingDate.toLocalDate()));
     }
 
     public LocalDateTime getStarting() {
@@ -83,12 +91,13 @@ public class Event extends Task {
     public LocalDateTime parseDate(String dateString) throws ChinChinException {
         for (DateTimeFormatter format : DateFormatter.DATEFORMAT) {
             try {
-                if (!format.toString().contains(" HHmm")) {
+                if (format.toString().contains(CONTAINS_TIME)) {
+                    return LocalDateTime.parse(dateString.trim(), format);
+                } else {
                     return LocalDate.parse(dateString.trim(), format).atStartOfDay();
                 }
-                return LocalDateTime.parse(dateString.trim(), format);
-            } catch (DateTimeParseException ignored) {
-                // ignored
+            } catch (Exception ignored) {
+                // Continue trying other formats
             }
         }
         throw new ChinChinException("Can you please choose proper date format?");

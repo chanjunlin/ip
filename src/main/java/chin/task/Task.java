@@ -1,6 +1,7 @@
 package chin.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a generic task with a completion status and a name.
@@ -96,5 +97,9 @@ public class Task {
 
     public String getType() {
         return "todo";
+    }
+
+    public LocalDateTime getDeadline() {
+        return null;
     }
 }

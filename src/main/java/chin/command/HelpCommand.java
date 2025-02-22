@@ -23,11 +23,12 @@ public class HelpCommand extends ChinChinCommand {
     }
 
     /**
-     * test
+     * Parses the user input to extract and validate the command.
      *
-     * @param userInput test
-     * @return test
-     * @throws ChinChinException test
+     * @param userInput The raw input string entered by the user.
+     * @return The validated command extracted from the user input, or null if no additional arguments are provided.
+     * @throws ChinChinException If the extracted command is not in the list of valid commands,
+     *      or if the input format is invalid.
      */
     public String parseUserInput(String userInput) throws ChinChinException {
         String[] parts = userInput.split(" ", 2);
@@ -44,33 +45,35 @@ public class HelpCommand extends ChinChinCommand {
     public String execute(CustomList taskList, ChinChinUI chinChinUI, Storage storage) throws ChinChinException {
         if (helpRequest == null) {
             return """
-                 [Here are the available commands]
+                 [Here are the available commands]\n
+                 Use 'help [command]' to learn how to use them\n
                  👋 hi, hello, greetings     -> Pretty self-explanatory
                  👋 bye, goodbye             -> Pretty self-explanatory
-                 🗑 delete                   -> Erm.. delete your task
                  🔍 find                     -> Find an item
                  📑 list                     -> List out your entire list lor
                  ✅ mark                     -> Mark an item
                  ❌ unmark                   -> Unmark an item
                  📅 todo, deadline, event    -> Add a new event, to-do, or deadline
-<<<<<<< HEAD
-                 ✍️ summary                  -> Helpfully show you the summary of your tasks
-=======
-                 ✍️ summary                   -> Helpfully show you the summary of your tasks
->>>>>>> master
                  📋 view                     -> View the schedule for a specific date
                  🗓 date                     -> Show you the correct date format
+                 ✍️ summary                  -> Helpfully show you the summary of your tasks
+                 🗑 delete                   -> Erm.. delete your task
                 """;
         } else {
             return getSpecificHelp();
         }
     }
 
+    /**
+     * Provides specific help information based on the type of user help request.
+     *
+     * @return A string containing detailed instructions or descriptions for the specified command
+     *      or a generic message if the command is unrecognized.
+     */
     public String getSpecificHelp() {
         return switch (this.helpRequest) {
         case "hi", "hello", "greetings" -> "You'll just get a greeting from me";
         case "bye", "goodbye" -> "I say bye bye to you";
-        case "delete" -> "How to use 'DELETE'? Just type:\n delete [index]";
         case "find" -> "How to use 'FIND'? Just type:\nfind [keyword]";
         case "list" -> "List out your entire list lor";
         case "mark" -> "How to use 'MARK'? Just type:\nmark [index]";
@@ -78,9 +81,11 @@ public class HelpCommand extends ChinChinCommand {
         case "todo" -> "How to use 'TODO'? Just type:\ntodo [your task description]";
         case "deadline" -> "How to use 'DEADLINE'? Just type:\ndeadline [your task description] /by [date]";
         case "event" -> "How to use 'EVENT'? Just type:\nevent [your task description] /from [date] /by [date]";
-        case "summary" -> "Just type:\nsummary";
         case "view" -> "How to use 'VIEW'? Just type:\nview [/on] [date]";
-        case "date" -> "Just in case I never specify, use [date] as 'dd-mm-yyyy' or dd/mm/yyyy'";
+        case "date" -> "Just in case I never specify, use [date] as 'dd-mm-yyyy HHmm' or dd/mm/yyyy HHmm'"
+            + "\nHHmm can also be omitted, the default timing would be 12am";
+        case "summary" -> "Just type:\nsummary";
+        case "delete" -> "How to use 'DELETE'? Just type:\n delete [index]";
         default -> "Use [help] to see all the commands please...";
         };
     }
