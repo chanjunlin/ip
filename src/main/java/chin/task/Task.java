@@ -1,6 +1,7 @@
 package chin.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a generic task with a completion status and a name.
@@ -81,7 +82,7 @@ public class Task {
      * @return A formatted string showing whether it's completed and its details
      */
     public String show() {
-        String header = (isDone ? "[\u2714\uFE0F]" : "[ ]");
+        String header = (isDone ? "[✔️]" : "[ ]");
         return this.taskTag.getTag() + " " + header + " " + this.taskDescription;
     }
 
@@ -96,5 +97,9 @@ public class Task {
 
     public String getType() {
         return "todo";
+    }
+
+    public LocalDateTime getDeadline() {
+        return null;
     }
 }

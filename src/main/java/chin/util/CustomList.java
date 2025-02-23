@@ -36,10 +36,70 @@ public class CustomList {
         sortTasks();
     }
 
+    /**
+     * Sorts the tasks in customList based on priority and additional criteria
+     *      for deadlines: the deadline with the earlier deadline has a higher priority
+     *      for events: the event with the earlier starting date has a higher priority, if they are the same, then
+     *      the event with the earlier ending date has a higher priority.
+     */
     private void sortTasks() {
-        customTaskList.sort((task1, task2) -> Integer.compare(getPriority(task1), getPriority(task2)));
+        customTaskList.sort((task1, task2) -> {
+            int priorityComparison = Integer.compare(getPriority(task1), getPriority(task2));
+
+            if (priorityComparison == 0) {
+                if (task1.getType().equals("deadline") && task2.getType().equals("deadline")) {
+                    return compareDeadlines((Deadline) task1, (Deadline) task2);
+                } else if (task1.getType().equals("event") && task2.getType().equals("event")) {
+                    return compareEvents((Event) task1, (Event) task2);
+                }
+            }
+            return priorityComparison;
+        });
     }
 
+    /**
+     * Compares two deadline tasks based on their due dates.
+     *
+     * @param deadline1 The first deadline task to be compared.
+     * @param deadline2 The second deadline task to be compared.
+     * @return A negative integer if deadline1's due date is earlier than
+     *         deadline2's due date; zero if they are equal or one/both deadlines
+     *         are null; a positive integer if deadline1's due date is later than
+     *         deadline2's due date.
+     */
+    private int compareDeadlines(Deadline deadline1, Deadline deadline2) {
+        if (deadline1.getDeadline() != null && deadline2.getDeadline() != null) {
+            return deadline1.getDeadline().compareTo(deadline2.getDeadline());
+        }
+        return 0;
+    }
+
+    /**
+     * Compares two event tasks based on their starting and ending times.
+     *
+     * @param event1 The first event task to be compared.
+     * @param event2 The second event task to be compared.
+     * @return A negative integer if event1 starts earlier than event2, or if they
+     *         start at the same time but event1 ends earlier than event2. Returns zero
+     *         if both starting and ending times are equal. Returns a positive integer if event1
+     *         starts later than event2, or ends later when both start at the same time.
+     */
+    private int compareEvents(Event event1, Event event2) {
+        int startComparison = event1.getStarting().compareTo(event2.getStarting());
+
+        if (startComparison != 0) {
+            return startComparison;
+        }
+
+        return event1.getEnding().compareTo(event2.getEnding());
+    }
+
+    /**
+     * Determines the priority of a task based on its type.
+     *
+     * @param task The task whose type will be used to determine its priority.
+     * @return An integer representing the priority of the given task. Lower numbers indicate higher priorities.
+     */
     private int getPriority(Task task) {
         return switch (task.getType()) {
         case "todo" -> 1;
@@ -87,9 +147,7 @@ public class CustomList {
     public ArrayList<Task> filterTaskByTag(String taskTag) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : this.customTaskList) {
-            if (!task.getTag().equals(taskTag)) {
-                continue;
-            } else {
+            if (task.getTag().equals(taskTag)) {
                 filteredTasks.add(task);
             }
         }
@@ -236,7 +294,7 @@ public class CustomList {
             if (!isMarked) {
                 currentTask.mark();
                 updateList();
-                returnString.append("Orh, marked the task as done liao!");
+                returnString.append("Orh, marked the task as done liao!\n");
                 returnString.append(currentTask.show());
             } else {
                 returnString.append("Marked already. You mean unmark ah?");
@@ -264,7 +322,7 @@ public class CustomList {
             if (isMarked) {
                 currentTask.unmark();
                 updateList();
-                returnString.append("Orh, marked the task as undone liao!");
+                returnString.append("Orh, marked the task as undone liao!\n");
                 returnString.append(currentTask.show());
             } else {
                 returnString.append("Not even marked. You mean mark ah?");
@@ -302,7 +360,7 @@ public class CustomList {
         String todoString = "todo ";
         int todoDescIndex = userInput.indexOf(todoString);
         String todoDesc = userInput.substring(todoDescIndex + (todoString.length())).trim();
-        if ((todoString.length()) > userInput.length()) {
+        if ((todoString.length()) >= userInput.length()) {
             throw new ChinChinException("your task description is empty bro..");
         }
         return new Task(todoDesc, TaskType.TODO, userInput);
@@ -342,13 +400,15 @@ public class CustomList {
         int byIndex = userInput.indexOf("/by");
         int endByIndex = byIndex + "/by ".length();
 
-        if (endByIndex > userInput.length()) {
-            throw new ChinChinException("put /by and no deadline abit...");
+        try {
+            String afterBy = userInput.substring(endByIndex).trim();
+
+            return new Deadline(deadlineDesc, TaskType.DEADLINE, afterBy, userInput);
+        } catch (ChinChinException e) {
+            throw new ChinChinException("Can you please choose proper date format?");
+        } catch (Exception e) {
+            throw new ChinChinException("jialat.. Please remember to key in your dates after '/by' hor, thanks");
         }
-
-        String afterBy = userInput.substring(endByIndex).trim();
-
-        return new Deadline(deadlineDesc, TaskType.DEADLINE, afterBy, userInput);
     }
 
     /**
@@ -365,7 +425,7 @@ public class CustomList {
         String deadlineString = "deadline ";
         int deadlineDescIndex = userInput.indexOf(deadlineString) + deadlineString.length();
 
-        if (deadlineString.length() > userInput.length()) {
+        if (deadlineString.length() >= userInput.length()) {
             throw new ChinChinException("why is your task description empty?");
         } else if (!userInput.contains("/by")) {
             throw new ChinChinException("you never put deadline then use the deadline feature for what??");
@@ -410,8 +470,11 @@ public class CustomList {
             String afterTo = userInput.substring(toIndex + "/to ".length()).trim();
 
             return new Event(eventDesc, TaskType.EVENT, betweenFromAndTo, afterTo, userInput);
+        } catch (ChinChinException e) {
+            throw new ChinChinException("Can you please choose proper date format?");
         } catch (Exception e) {
-            throw new ChinChinException("jialat.. Let you see the error message for fun\n[" + e.toString() + "]");
+            throw new ChinChinException("jialat.. Please remember to key in your dates after '/from' and '/to' hor, "
+                + "thanks");
         }
     }
 
@@ -427,7 +490,7 @@ public class CustomList {
     private static String getEventString(String userInput, String eventString) throws ChinChinException {
         int eventDescIndex = userInput.indexOf(eventString) + eventString.length();
 
-        if (eventString.length() > userInput.length()) {
+        if (eventString.length() >= userInput.length()) {
             throw new ChinChinException("bro your event task got no description");
         } else if (!userInput.contains("/from")) {
             throw new ChinChinException("if you don't state the starting, then just use 'deadline' feature");

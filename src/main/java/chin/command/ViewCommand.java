@@ -48,6 +48,12 @@ public class ViewCommand extends ChinChinCommand {
         return null;
     }
 
+    /**
+     * Returns the DateTime of a task in a string format
+     *
+     * @param dateTime The DateTime of a deadline tasks or event task
+     * @return String of the DateTime of the task
+     */
     public String getDateTimeString(LocalDateTime dateTime) {
         DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         return dateTime.format(displayFormatter);
@@ -154,6 +160,7 @@ public class ViewCommand extends ChinChinCommand {
      */
     private String formatDeadlines(ArrayList<Deadline> deadlineTasks) {
         StringBuilder result = new StringBuilder("\n[Deadlines]\n");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 
         int index = 1;
         for (Deadline deadline : deadlineTasks) {
@@ -161,7 +168,7 @@ public class ViewCommand extends ChinChinCommand {
                 .append(". ")
                 .append(deadline.getTaskDescription())
                 .append(" - Due at ")
-                .append(deadline.getDeadline().toLocalTime())
+                .append(deadline.getDeadline().toLocalTime().format(timeFormatter))
                 .append("\n");
         }
 

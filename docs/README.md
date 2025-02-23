@@ -21,7 +21,8 @@ Syntax: todo [task description]
 Example: todo read a book
 
 ```expected output```
-```Oki, task added liao ✅:
+```
+Oki, task added liao ✅:
 [T] [ ] read a book
 Now you got 1 task in the list.
 ```
@@ -32,7 +33,8 @@ Syntax: deadline [task description] /by [dd-MM-yyyy HHmm]
 Example: deadline read a book /by 12-12-2025 1234
 
 ```expected output```
-```Oki, task added liao ✅:
+```
+Oki, task added liao ✅:
 [D] [ ] read a book
 DEADLINE: Dec 12 2025 12:34 pm
 Now you got 1 task in the list.
@@ -44,7 +46,8 @@ Syntax: event [task description] /from [dd-MM-yyyy HHmm] /to [dd-MM-yyyy HHmm]
 Example: event read a book /from 12-12-2025 1234 /to 12-12-2025 2345
 
 ```expected output```
-```Oki, task added liao ✅:
+```
+Oki, task added liao ✅:
 [E] [ ] read a book (FROM: Dec 12 2025 12:34 pm TO: Dec 12 2025 11.45 pm)
 Now you got 1 task in the list.
 ```
@@ -221,4 +224,45 @@ Schedule for 2025-12-12:
 
 [Deadlines]:
 1. read a book - Due at 12:34 pm
+```
+
+## Supported Date and Time Formats
+
+For all commands requiring dates and times, ChinChin supports these formats:
+
+Syntax: 
+    - `dd-MM-yyyy HHmm`
+    - `dd/MM/yyyy HHmm`
+
+Examples:
+    - With time: `deadline submit report /by 25-12-2023 1400`
+    - Without time: `event team meeting /from 01/01/2024 /to 03/01/2024`
+      (defaults to midnight if time is not provided)
+
+Default Behavior:
+   If you omit the time (`HHmm`), it will default to midnight (`00:00`).
+
+### Deadline
+Syntax: deadline [task description] /by [dd-MM-yyyy HHmm]
+
+Example: `deadline read a book /by 12-12-2025`
+
+```expected output```
+```
+Oki, task added liao ✅: 
+[D] [ ] Read a book
+DEADLINE: Dec 12 2025 12:00 am
+Now you got 1 tasks in the list.
+```
+
+### Event
+Syntax: event [task description] /from [dd-MM-yyyy HHmm] /to [dd-MM-yyyy HHmm]
+ 
+Example: `event complete CS2107 Assignment 1 /from 21-02-2025 1200 /to 21/02/2025`.
+
+```expected output```
+```
+Oki, task added liao ✅:
+[E] [ ] complete CS2107 Assignment 1 (FROM: Feb 21 2025 12:00 pm TO: Feb 21 2025 12:00 am)
+Now you got 1 tasks in the list.
 ```
