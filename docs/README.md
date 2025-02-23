@@ -36,6 +36,8 @@ It supports commands like:
 - Run the following command
 `java -jar ChinChin.jar`
 
+---
+
 ## Main Feature - Add Tasks (Todo, Deadline, Event)
 Adds a new task to your list. This can be either a simple to-do, a deadline with a due date/time, or an event scheduled
 for a specific time.
@@ -51,7 +53,7 @@ Syntax:
 Example: 
 `todo read a book`
 
-```expected output```
+Expected output:
 ```
 Oki, task added liao ✅:
 [T] [ ] read a book
@@ -67,7 +69,7 @@ Syntax:
 Example: 
 `deadline read a book /by 12-12-2025 1234`
 
-```expected output```
+Expected output:
 ```
 Oki, task added liao ✅:
 [D] [ ] read a book
@@ -84,7 +86,7 @@ Syntax:
 Example: 
 `event read a book /from 12-12-2025 1234 /to 12-12-2025 2345`
 
-```expected output```
+Expected output:
 ```
 Oki, task added liao ✅:
 [E] [ ] read a book (FROM: Dec 12 2025 12:34 pm TO: Dec 12 2025 11.45 pm)
@@ -99,9 +101,7 @@ Command: ```bye```,```goodbye```
 Example: 
 `bye`
 
-```
-expected output
-```
+Expected output:
 ```
 Bye! Hope to see you again soon.
 ```
@@ -117,9 +117,7 @@ Syntax:
 Example: 
 `delete 2`
 
-```
-expected output
-```
+Expected output:
 ```
 Okay Boss, removed liao:
 [T] [ ] read a book
@@ -136,9 +134,7 @@ Syntax:
 Example: 
 `find book`
 
-```
-expected output
-```
+Expected output:
 ```
 Here are some of the matches:
 1. [T] [ ] read a book
@@ -153,7 +149,7 @@ Command:
 Example: 
 `list`
 
-```expected output```
+Expected output:
 ```
 Here are the tasks in your list:
 
@@ -180,9 +176,9 @@ Syntax:
 Example: 
 `mark 2`
 
-
-```expected output```
-```Orh, marked the task as done liao:
+Expected output:
+```
+Orh, marked the task as done liao:
 [T] [✔️] read a book
 ```
 
@@ -198,8 +194,9 @@ Syntax:
 Example: 
 `unmark 2`
 
-```expected output```
-```Orh, marked the task as undone liao:
+Expected output:
+```
+Orh, marked the task as undone liao:
 [T] [✔️] read a book
 ```
 
@@ -212,7 +209,7 @@ Command:
 Example: 
 `summary`
 
-```expected output```
+Expected output:
 ```
 Here's your summary:
 📝Todos       : 1
@@ -234,8 +231,9 @@ Syntax:
 
 Example: `help find`
 
-```expected output```
-```How to use 'FIND'? Just type
+Expected output:
+```
+How to use 'FIND'? Just type
 find [keyword]
 ```
 
@@ -249,7 +247,7 @@ Syntax:
 
 Example: `view /on 12/12/2025`
 
-```expected output```
+Expected output:
 ```
 Schedule for 2025-12-12:
 
@@ -279,7 +277,7 @@ Syntax:
 Example: 
 `deadline read a book /by 12-12-2025`
 
-```expected output```
+Expected output:
 ```
 Oki, task added liao ✅: 
 [D] [ ] Read a book
@@ -294,7 +292,7 @@ Syntax:
 Example: 
 `event complete CS2107 Assignment 1 /from 21-02-2025 1200 /to 21/02/2025`.
 
-```expected output```
+Expected output:
 ```
 Oki, task added liao ✅:
 [E] [ ] complete CS2107 Assignment 1 (FROM: Feb 21 2025 12:00 pm TO: Feb 21 2025 12:00 am)
