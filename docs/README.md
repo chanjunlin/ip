@@ -22,6 +22,7 @@ It supports commands like:
 - `summary` - Gives a summary on the number of tasks
 - `view` - View the tasks on a specific date
 - `find` - Find the task with the specific keyword
+- `help` - Display what each commands do
 
 ---
 
@@ -93,60 +94,13 @@ Oki, task added liao ✅:
 Now you got 1 task in the list.
 ```
 
-## Exit Program
-ChinChin would say goodbye and close the program.
-
-Command: ```bye```,```goodbye```
-
-Example: 
-`bye`
-
-Expected output:
-```
-Bye! Hope to see you again soon.
-```
-
-## Delete Tasks
-ChinChin would help to delete the task with the specified index.
-
-Command: ```delete```
-
-Syntax: 
-`delete <TASK_INDEX>`
-
-Example: 
-`delete 2`
-
-Expected output:
-```
-Okay Boss, removed liao:
-[T] [ ] read a book
-```
-
-## Find Task
-ChinChin would help to collate all the tasks with the given keyword.
-
-Command: ```find```
-
-Syntax: 
-`find <KEYWORD>`
-
-Example: 
-`find book`
-
-Expected output:
-```
-Here are some of the matches:
-1. [T] [ ] read a book
-```
-
 ## List All Tasks
 ChinChin would help to list out all the tasks, starting with `Todo`, `Deadline`, and finally `Event`.
 
 Command:
 ```list```
 
-Example: 
+Example:
 `list`
 
 Expected output:
@@ -167,13 +121,13 @@ No upcoming event le.
 ## Mark Task As Complete
 ChinChin would help to mark specified task as complete.
 
-Command: 
+Command:
 ```mark```
 
-Syntax: 
+Syntax:
 `mark <TASK_INDEX>`
 
-Example: 
+Example:
 `mark 2`
 
 Expected output:
@@ -185,13 +139,13 @@ Orh, marked the task as done liao:
 ## Unmark Task As Incomplete
 ChinChin would help to unmark specified task as complete.
 
-Command: 
+Command:
 ```unmark```
 
-Syntax: 
+Syntax:
 `unmark <TASK_INDEX>`
 
-Example: 
+Example:
 `unmark 2`
 
 Expected output:
@@ -200,13 +154,30 @@ Orh, marked the task as undone liao:
 [T] [✔️] read a book
 ```
 
+## Delete Tasks
+ChinChin would help to delete the task with the specified index.
+
+Command: ```delete```
+
+Syntax: 
+`delete <TASK_INDEX>`
+
+Example: 
+`delete 2`
+
+Expected output:
+```
+Okay Boss, removed liao:
+[T] [ ] read a book
+```
+
 ## View Summary Of Tasks
 ChinChin will help to display the summary of your tasks, which is the count of Todo, Deadline and Event
 
-Command: 
+Command:
 ```Summary```
 
-Example: 
+Example:
 `summary`
 
 Expected output:
@@ -215,6 +186,41 @@ Here's your summary:
 📝Todos       : 1
 ⏰Deadlines   : 1
 📅Event       : 0
+```
+
+## View Tasks On Date
+ChinChin would display all the tasks on that date for you
+
+Command: ```view```
+
+Syntax:
+`help <DATE>`
+
+Example: `view /on 12/12/2025`
+
+Expected output:
+```
+Schedule for 2025-12-12:
+
+[Deadlines]:
+1. read a book - Due at 12:34 pm
+```
+
+## Find Task
+ChinChin would help to collate all the tasks with the given keyword.
+
+Command: ```find```
+
+Syntax: 
+`find <KEYWORD>`
+
+Example: 
+`find book`
+
+Expected output:
+```
+Here are some of the matches:
+1. [T] [ ] read a book
 ```
 
 ## Show The Help For Each Commands
@@ -235,24 +241,6 @@ Expected output:
 ```
 How to use 'FIND'? Just type
 find [keyword]
-```
-
-## View Tasks On Date
-ChinChin would display all the tasks on that date for you
-
-Command: ```view```
-
-Syntax: 
-`help <DATE>`
-
-Example: `view /on 12/12/2025`
-
-Expected output:
-```
-Schedule for 2025-12-12:
-
-[Deadlines]:
-1. read a book - Due at 12:34 pm
 ```
 
 ## Supported Date and Time Formats
@@ -297,4 +285,17 @@ Expected output:
 Oki, task added liao ✅:
 [E] [ ] complete CS2107 Assignment 1 (FROM: Feb 21 2025 12:00 pm TO: Feb 21 2025 12:00 am)
 Now you got 1 tasks in the list.
+```
+
+## Exit Program
+ChinChin would say goodbye and close the program.
+
+Command: ```bye```,```goodbye```
+
+Example:
+`bye`
+
+Expected output:
+```
+Bye! Hope to see you again soon.
 ```
