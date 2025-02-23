@@ -1,12 +1,14 @@
 package chin.ui;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import chin.main.ChinChin;
 import chin.util.ChinChinException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -44,7 +46,6 @@ public class Main extends Application {
      * Loads and displays the main application window.
      *
      * @param stage The primary stage on which to display the loaded scene.
-     *
      * @throws IOException If there is an error loading the FXML file for
      *                     the main window layout.
      */
@@ -53,6 +54,8 @@ public class Main extends Application {
         AnchorPane ap = fxmlLoader.load();
         Scene scene = new Scene(ap);
         stage.setScene(scene);
+        stage.setTitle("ChinChin");
+        stage.getIcons().add(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/images/icon.png"))));
         fxmlLoader.<MainWindow>getController().setChin(this.chinChin);
         stage.show();
     }

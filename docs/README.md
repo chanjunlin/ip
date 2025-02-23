@@ -8,17 +8,48 @@ Welcome to ChinChin. This simple and humble yet powerful CLI-based productivity 
 deadlines, and events effortlessly. Designed for users who prefer lightweight tools over complicated apps, ChinChin
 makes managing tasks quick and easy.
 
+It supports commands like:
+
+- `hi` - ChinChin greets you
+- `bye` - ChinChin says goodbye
+- `todo` - Add a todo task
+- `deadline` - Add a deadline task
+- `event` - Add an event task
+- `list` - List all tasks
+- `mark` - Mark a task as done
+- `unmark` - Unmark a task as undone
+- `delete` - Delete a task
+- `summary` - Gives a summary on the number of tasks
+- `view` - View the tasks on a specific date
+- `find` - Find the task with the specific keyword
+
+---
+
+## Quick Start
+### Requirements
+- Ensure that you have installed **Java 17** on your computer
+- Download the latest version of ChinChin.jar from GitHub release
+
+### Running ChinChin
+- Open **terminal** (MacOS) or **command prompt** (Windows)
+- Navigate to the directory where ChinChin.jar is installed
+- Run the following command
+`java -jar ChinChin.jar`
+
 ## Main Feature - Add Tasks (Todo, Deadline, Event)
-
-Command: ```todo```, ```deadline```, ```event```
-
 Adds a new task to your list. This can be either a simple to-do, a deadline with a due date/time, or an event scheduled
 for a specific time.
 
-### Todo
-Syntax: todo [task description]
+Command: ```todo```, ```deadline```, ```event```
 
-Example: todo read a book
+### Todo
+A simple task without a date or time attached to it.
+
+Syntax: 
+`todo <TASK_DESCRIPTION>`
+
+Example: 
+`todo read a book`
 
 ```expected output```
 ```
@@ -28,9 +59,13 @@ Now you got 1 task in the list.
 ```
 
 ### Deadline
-Syntax: deadline [task description] /by [dd-MM-yyyy HHmm]
+A task with a deadline.
 
-Example: deadline read a book /by 12-12-2025 1234
+Syntax: 
+`deadline <TASK_DESCRIPTION> /by <dd-MM-yyyy HHmm>`
+
+Example: 
+`deadline read a book /by 12-12-2025 1234`
 
 ```expected output```
 ```
@@ -41,9 +76,13 @@ Now you got 1 task in the list.
 ```
 
 ### Event
-Syntax: event [task description] /from [dd-MM-yyyy HHmm] /to [dd-MM-yyyy HHmm]
+A task that has a starting date and an ending date.
 
-Example: event read a book /from 12-12-2025 1234 /to 12-12-2025 2345
+Syntax: 
+`event <TASK_DESCRIPTION> /from <dd-MM-yyyy HHmm> /to <dd-MM-yyyy HHmm>`
+
+Example: 
+`event read a book /from 12-12-2025 1234 /to 12-12-2025 2345`
 
 ```expected output```
 ```
@@ -53,14 +92,12 @@ Now you got 1 task in the list.
 ```
 
 ## Exit Program
+ChinChin would say goodbye and close the program.
 
 Command: ```bye```,```goodbye```
 
-Exits the program.
-
-Example: `bye`
-
-ChinChin would say goodbye and close the program.
+Example: 
+`bye`
 
 ```
 expected output
@@ -70,16 +107,15 @@ Bye! Hope to see you again soon.
 ```
 
 ## Delete Tasks
+ChinChin would help to delete the task with the specified index.
 
 Command: ```delete```
 
-Deletes a task from your list.
+Syntax: 
+`delete <TASK_INDEX>`
 
-Syntax: delete [task number]
-
-Example: `delete [2]`
-
-ChinChin would help to delete the task with the specified index.
+Example: 
+`delete 2`
 
 ```
 expected output
@@ -90,16 +126,15 @@ Okay Boss, removed liao:
 ```
 
 ## Find Task
+ChinChin would help to collate all the tasks with the given keyword.
 
 Command: ```find```
 
-Find the task(s) with the given keyword.
+Syntax: 
+`find <KEYWORD>`
 
-Syntax: find [key word]
-
-Example: `find book`
-
-ChinChin would help to collate all the tasks with the given keyword.
+Example: 
+`find book`
 
 ```
 expected output
@@ -110,14 +145,13 @@ Here are some of the matches:
 ```
 
 ## List All Tasks
-
-Command:```list```
-
-List all the tasks
-
-Example: `list`
-
 ChinChin would help to list out all the tasks, starting with `Todo`, `Deadline`, and finally `Event`.
+
+Command:
+```list```
+
+Example: 
+`list`
 
 ```expected output```
 ```
@@ -132,20 +166,20 @@ DEADLINE: Dec 12 2025 12:34 pm
 
 [Event 📅]:
 No upcoming event le.
-
 ```
 
 ## Mark Task As Complete
-
-Command: ```mark```
-
-Mark a specific task as complete
-
-Syntax: mark [task number]
-
-Example: `mark 2`
-
 ChinChin would help to mark specified task as complete.
+
+Command: 
+```mark```
+
+Syntax: 
+`mark <TASK_INDEX>`
+
+Example: 
+`mark 2`
+
 
 ```expected output```
 ```Orh, marked the task as done liao:
@@ -153,16 +187,16 @@ ChinChin would help to mark specified task as complete.
 ```
 
 ## Unmark Task As Incomplete
-
-Command: ```unmark```
-
-Unmark a specific marked task as incomplete
-
-Syntax: unmark [task number]
-
-Example: `unmark 2`
-
 ChinChin would help to unmark specified task as complete.
+
+Command: 
+```unmark```
+
+Syntax: 
+`unmark <TASK_INDEX>`
+
+Example: 
+`unmark 2`
 
 ```expected output```
 ```Orh, marked the task as undone liao:
@@ -170,37 +204,35 @@ ChinChin would help to unmark specified task as complete.
 ```
 
 ## View Summary Of Tasks
-Command: ```Summary```
-
-Displays an overview of all your tasks categorized into their types and statuses.
-
-Example: `summary`
-
 ChinChin will help to display the summary of your tasks, which is the count of Todo, Deadline and Event
 
+Command: 
+```Summary```
+
+Example: 
+`summary`
+
 ```expected output```
-```Here's your summary:
+```
+Here's your summary:
 📝Todos       : 1
 ⏰Deadlines   : 1
 📅Event       : 0
 ```
 
 ## Show The Help For Each Commands
+ChinChin would display all the available commands and what they do
+
 Command: ```help```
-
-Displays the help for each of the command
-
-Syntax: help [keyword]
 
 Example: `help`
 
-ChinChin would display all the available commands and what they do
+ChinChin would advise you on how to use this command
 
-```expected output```
+Syntax: 
+`help <COMMAND>`
 
 Example: `help find`
-
-ChinChin would advise you on how to use this command
 
 ```expected output```
 ```How to use 'FIND'? Just type
@@ -208,15 +240,14 @@ find [keyword]
 ```
 
 ## View Tasks On Date
+ChinChin would display all the tasks on that date for you
+
 Command: ```view```
 
-Displays all the tasks on that specific date
-
-Syntax: help [date]
+Syntax: 
+`help <DATE>`
 
 Example: `view /on 12/12/2025`
-
-ChinChin would display all the tasks on that date for you
 
 ```expected output```
 ```
@@ -227,12 +258,11 @@ Schedule for 2025-12-12:
 ```
 
 ## Supported Date and Time Formats
-
 For all commands requiring dates and times, ChinChin supports these formats:
 
 Syntax: 
-    - `dd-MM-yyyy HHmm`
-    - `dd/MM/yyyy HHmm`
+    - `<dd-MM-yyyy HHmm>`
+    - `<dd/MM/yyyy HHmm>`
 
 Examples:
     - With time: `deadline submit report /by 25-12-2023 1400`
@@ -243,9 +273,11 @@ Default Behavior:
    If you omit the time (`HHmm`), it will default to midnight (`00:00`).
 
 ### Deadline
-Syntax: deadline [task description] /by [dd-MM-yyyy HHmm]
+Syntax: 
+`deadline <task description> /by <dd-MM-yyyy HHmm>`
 
-Example: `deadline read a book /by 12-12-2025`
+Example: 
+`deadline read a book /by 12-12-2025`
 
 ```expected output```
 ```
@@ -256,9 +288,11 @@ Now you got 1 tasks in the list.
 ```
 
 ### Event
-Syntax: event [task description] /from [dd-MM-yyyy HHmm] /to [dd-MM-yyyy HHmm]
+Syntax: 
+`event <task description> /from <dd-MM-yyyy HHmm> /to <dd-MM-yyyy HHmm>`
  
-Example: `event complete CS2107 Assignment 1 /from 21-02-2025 1200 /to 21/02/2025`.
+Example: 
+`event complete CS2107 Assignment 1 /from 21-02-2025 1200 /to 21/02/2025`.
 
 ```expected output```
 ```
