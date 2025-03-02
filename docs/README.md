@@ -185,7 +185,7 @@ ChinChin will help to display the summary of your tasks, which is the count of T
 
 Command:
 ```
-Summary
+summary
 ```
 
 Example:
@@ -206,9 +206,6 @@ Command:
 ```
 view
 ```
-
-Syntax:
-`help <DATE>`
 
 Example: `view /on 12/12/2025`
 
@@ -252,8 +249,10 @@ Example: `help`
 
 ChinChin would advise you on how to use this command
 
-Syntax: 
-`help <COMMAND>`
+Command: 
+```
+help <COMMAND>
+```
 
 Example: `help find`
 
