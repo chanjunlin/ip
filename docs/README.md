@@ -273,12 +273,14 @@ Syntax:
 ```
 
 Examples:
-    - With time: `deadline submit report /by 25-12-2023 1400`
-    - Without time: `event team meeting /from 01/01/2024 /to 03/01/2024`
+```
+    - With time: deadline submit report /by 25-12-2023 1400
+    - Without time: event team meeting /from 01/01/2024 /to 03/01/2024
       (defaults to midnight if time is not provided)
 
 Default Behavior:
    If you omit the time (`HHmm`), it will default to midnight (`00:00`).
+```
 
 ### Deadline
 Syntax: 
