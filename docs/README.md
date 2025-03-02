@@ -282,35 +282,6 @@ Default Behavior:
    If you omit the time (`HHmm`), it will default to midnight (`00:00`).
 ```
 
-### Deadline
-Syntax: 
-`deadline <task description> /by <dd-MM-yyyy HHmm>`
-
-Example: 
-`deadline read a book /by 12-12-2025`
-
-Expected output:
-```
-Oki, task added liao ✅: 
-[D] [ ] Read a book
-DEADLINE: Dec 12 2025 12:00 am
-Now you got 1 tasks in the list.
-```
-
-### Event
-Syntax: 
-`event <task description> /from <dd-MM-yyyy HHmm> /to <dd-MM-yyyy HHmm>`
- 
-Example: 
-`event complete CS2107 Assignment 1 /from 21-02-2025 1200 /to 21/02/2025`.
-
-Expected output:
-```
-Oki, task added liao ✅:
-[E] [ ] complete CS2107 Assignment 1 (FROM: Feb 21 2025 12:00 pm TO: Feb 21 2025 12:00 am)
-Now you got 1 tasks in the list.
-```
-
 ## Exit Program
 ChinChin would say goodbye and close the program.
 
