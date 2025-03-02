@@ -98,7 +98,9 @@ Now you got 1 task in the list.
 ChinChin would help to list out all the tasks, starting with `Todo`, `Deadline`, and finally `Event`.
 
 Command:
-```list```
+```
+list
+```
 
 Example:
 `list`
@@ -122,7 +124,9 @@ No upcoming event le.
 ChinChin would help to mark specified task as complete.
 
 Command:
-```mark```
+```
+mark
+```
 
 Syntax:
 `mark <TASK_INDEX>`
