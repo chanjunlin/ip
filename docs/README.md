@@ -144,7 +144,9 @@ Orh, marked the task as done liao:
 ChinChin would help to unmark specified task as complete.
 
 Command:
-```unmark```
+```
+unmark
+```
 
 Syntax:
 `unmark <TASK_INDEX>`
@@ -161,7 +163,10 @@ Orh, marked the task as undone liao:
 ## Delete Tasks
 ChinChin would help to delete the task with the specified index.
 
-Command: ```delete```
+Command: 
+```
+delete
+```
 
 Syntax: 
 `delete <TASK_INDEX>`
@@ -179,7 +184,9 @@ Okay Boss, removed liao:
 ChinChin will help to display the summary of your tasks, which is the count of Todo, Deadline and Event
 
 Command:
-```Summary```
+```
+Summary
+```
 
 Example:
 `summary`
@@ -195,7 +202,10 @@ Here's your summary:
 ## View Tasks On Date
 ChinChin would display all the tasks on that date for you
 
-Command: ```view```
+Command: 
+```
+view
+```
 
 Syntax:
 `help <DATE>`
@@ -213,7 +223,10 @@ Schedule for 2025-12-12:
 ## Find Task
 ChinChin would help to collate all the tasks with the given keyword.
 
-Command: ```find```
+Command: 
+```
+find
+```
 
 Syntax: 
 `find <KEYWORD>`
@@ -230,7 +243,10 @@ Here are some of the matches:
 ## Show The Help For Each Commands
 ChinChin would display all the available commands and what they do
 
-Command: ```help```
+Command: 
+```
+help
+```
 
 Example: `help`
 
