@@ -267,8 +267,10 @@ find [keyword]
 For all commands requiring dates and times, ChinChin supports these formats:
 
 Syntax: 
-    - `<dd-MM-yyyy HHmm>`
-    - `<dd/MM/yyyy HHmm>`
+```
+    - <dd-MM-yyyy HHmm>
+    - <dd/MM/yyyy HHmm>
+```
 
 Examples:
     - With time: `deadline submit report /by 25-12-2023 1400`
